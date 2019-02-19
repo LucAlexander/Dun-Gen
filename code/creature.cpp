@@ -15,7 +15,7 @@ player::player(){
 	kills = 0;
 	hp = 30;
 	weapon = item();
-	name = "me";
+	name = chooseName();
 }
 //functions
 string player::chooseName(){
