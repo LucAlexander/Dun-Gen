@@ -18,6 +18,11 @@ player::player(){
 	name = "me";
 }
 //functions
+string player::chooseName(){
+	string str;
+	//chopose random name from either list/array or read in from file
+	return str;
+}
 void player::playerStrike(item& weapon, creature& target){
 	int n = rand() % 10 + 1;
 	if (n <= weapon.reliability){
