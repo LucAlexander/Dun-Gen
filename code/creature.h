@@ -18,7 +18,6 @@ class player : public creature{
 		void playerStrike(item& weapon, creature& target);
 		void playerDie();
 		string chooseName();
-		void playerMode();
 		string printStats();
 };
 class enemy : public creature{
