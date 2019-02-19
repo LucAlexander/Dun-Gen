@@ -17,6 +17,7 @@ class player : public creature{
 		player();
 		void playerStrike(item& weapon, creature& target);
 		void playerDie();
+		string chooseName();
 		void playerMode();
 		string printStats();
 };
