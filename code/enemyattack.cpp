@@ -9,5 +9,10 @@ using namespace std;
 enemyAttack::enemyAttack(){
 	damage = ((rand() % 5) + 1);
 	reliability = ((rand() % 8)+3);
-	name = "hit";
+	name = randomName();
+}
+string enemyAttack::randomName(){
+	string str;
+	//write code to return a string in the same format as the players item name.
+	return str;
 }
