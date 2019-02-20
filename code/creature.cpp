@@ -51,7 +51,7 @@ enemy::enemy(){
 	att = enemyAttack();
 	hp = ((rand() % 16) + 5);
 	name = randomName();
-	background = description();
+	background = description(name);
 	block = false;
 }
 //functions
