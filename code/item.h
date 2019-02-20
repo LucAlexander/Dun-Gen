@@ -11,5 +11,6 @@ class item{
 		int reliability;
 		int special;
 		item();
+		item(string name, int damage, int reliability);
 		string itemName();
 };
