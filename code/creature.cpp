@@ -16,6 +16,7 @@ player::player(){
 	hp = 30;
 	weapon = item();
 	name = chooseName();
+	block = false;
 }
 //functions
 string player::chooseName(){
@@ -25,8 +26,11 @@ string player::chooseName(){
 }
 void player::playerStrike(item& weapon, creature& target){
 	int n = rand() % 10 + 1;
+	int blockchance = rand() % 3 + 1;
 	if (n <= weapon.reliability){
-		target.hp -= weapon.damage;
+		if (target.block == false || blockchance == 3){
+			target.hp -= weapon.damage;
+		}
 	}
 }
 void player::playerDie(){
@@ -45,6 +49,7 @@ enemy::enemy(){
 	hp = ((rand() % 16) + 5);
 	name = randomName();
 	background = description();
+	block = false;
 }
 //functions
 string enemy::printStats(){
@@ -57,8 +62,11 @@ void enemy::enemyDie(creature& pl){
 }
 void enemy::enemyStrike(creature& pl, enemyAttack& att){
 	int n = rand() % 10 + 1;
+	int blockchance = rand() % 3 + 1;
 	if (n <= att.reliability + pl.kills / 5){
-		pl.hp -= att.damage + pl.kills / 5;
+		if (pl.block == false || blockchance == 3){
+			pl.hp -= att.damage + pl.kills / 5;
+		}
 	}
 }
 string enemy::randomName(){	
