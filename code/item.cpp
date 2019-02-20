@@ -12,6 +12,12 @@ item::item(){
 	reliability = ((rand() % 8)+3);
 	//deal with special
 }
+item::item(string n, int d, int r){
+	name = n;
+	damage = d;
+	reliability = r;
+	//deal with special
+}
 //functions
 string item::itemName(){
 	//reading through the file goes here
