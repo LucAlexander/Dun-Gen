@@ -8,4 +8,5 @@ class general{
 	public:
 		int findLength(ifstream& file);
 		string randomName();
+		string randomVerb();
 };
