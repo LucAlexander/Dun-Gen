@@ -50,10 +50,25 @@ string description::fillLife(string str){
 		temp = obj.randomVerb();
 		desc.replace(desc.find("%V"), temp.length(), temp);
 	}
+	while(desc.find("%A")!=desc.npos())
+	{
+		temp = obj.randomAdjective();
+		desc.replace(desc.find("%A"), temp.length(), temp);
+	}
 	while(desc.find("%P")!=desc.npos())
 	{
-		temp = obj.randomParticiple();
+		temp = obj.randomParticipleAdj();
 		desc.replace(desc.find("%P"), temp.length(), temp);
+	}
+	while(desc.find("%D")!=desc.npos())
+	{
+		temp = obj.randomDescriptionAdj();
+		desc.replace(desc.find("%D"), temp.length(), temp);
+	}
+	while(desc.find("%E")!=desc.npos())
+	{
+		temp = obj.randomPersonalityAdj();
+		desc.replace(desc.find("%E"), temp.length(), temp);
 	}
 	while(desc.find("%O")!=desc.npos())
 	{
@@ -83,8 +98,6 @@ string description::fillCharacteristics(string str){
 	{
 		cout << "Error opening file";
 	}
-	// write function to fill in template.
-	// use directory: TextFiles/Formats/earlyLife, and TextFiles/WordsToPlugIn/... for adjectives, participles, and nouns to plug in.
 	while(desc.find("$M")!=desc.npos())
 	{
 		desc.replace(desc.find("$M"), name.length(), name);
@@ -99,10 +112,25 @@ string description::fillCharacteristics(string str){
 		temp = obj.randomVerb();
 		desc.replace(desc.find("%V"), temp.length(), temp);
 	}
+	while(desc.find("%A")!=desc.npos())
+	{
+		temp = obj.randomAdjective();
+		desc.replace(desc.find("%A"), temp.length(), temp);
+	}
 	while(desc.find("%P")!=desc.npos())
 	{
-		temp = obj.randomParticiple();
+		temp = obj.randomParticipleAdj();
 		desc.replace(desc.find("%P"), temp.length(), temp);
+	}
+	while(desc.find("%D")!=desc.npos())
+	{
+		temp = obj.randomDescriptionAdj();
+		desc.replace(desc.find("%D"), temp.length(), temp);
+	}
+	while(desc.find("%E")!=desc.npos())
+	{
+		temp = obj.randomPersonalityAdj();
+		desc.replace(desc.find("%E"), temp.length(), temp);
 	}
 	while(desc.find("%O")!=desc.npos())
 	{
