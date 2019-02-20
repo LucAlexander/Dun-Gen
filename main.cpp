@@ -20,15 +20,14 @@ int main() {
 			int choice;
 			cout << "choose action \n"; // list options
 			cout << "1) attack \n";
-			cout << "2) attack double turn \n";
+			cout << "2) block next turn \n";
 			cin >> choice; // read in choice
 			switch(choice){
 				case 1: // attack enemy
 					my.playerStrike(my.weapon, opponent);
 				break;
-				case 2: // doulbe turn attack
-					turn *= -1;
-					my.playerStrike(my.weapon, opponent);
+				case 2: // block next turn
+					my.block = true;
 				break;
 				case 3:
 					//other options
@@ -42,9 +41,8 @@ int main() {
 				case 1: // attack player
 					opponent.enemyStrike(my, opponent.att);
 				break;
-				case 2: // double turn strike
-					turn *= -1;
-					opponent.enemyStrike(my, opponent.att);
+				case 2: // block next turn
+					opponent.block = true;
 				break;
 				case 3:
 					// other options
