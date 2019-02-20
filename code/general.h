@@ -9,6 +9,9 @@ class general{
 		int findLength(ifstream& file);
 		string randomName();
 		string randomVerb();
-		string randomParticiple();
+		string randomParticipleAdj();
+		string randomDescriptionAdj();
+		string randomPersonalityAdj();
+		string randomAdjective();
 		string randomNoun();
 };
