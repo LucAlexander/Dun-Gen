@@ -13,6 +13,8 @@ int main() {
 	player my = player(); // instantiate player
 	enemy opponent = enemy(); // instantiate first enemy
 	int turn = 1; // turn var [1 if player's, 2 if enemy's]
+	cout << my.printStats() << "\n";
+	cout << opponent.printStats << "\n";
 	while(my.hp > 0){ // main loop: terminates upon player's death
 		if (turn){ // ---------------------------------------------------------------------player's turn
 			int choice;
@@ -58,6 +60,7 @@ int main() {
 			cout << opponent.background.earlyLife << "\n"; // early life of the enemy
 			cout << opponent.background.characteristics << "\n"; // description
 			cout << opponent.background.qualities << "\n"; // stats
+			cout << opponent.printStats() << "\n";
 		}
 	}
 	my.playerDie();
