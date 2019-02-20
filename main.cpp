@@ -52,7 +52,15 @@ int main() {
 		} // ---------------------------------------------------------------------end round checks and specifications
 		if (opponent.hp <= 0){ // if opponent is dead;
 			cout << my.name << " defeated " << opponent.name << " using " << my.weapon.name << "\n"; // print tagline for defeating enemy
-			opponenet.drop();
+			if (opponenet.willDrop(opponent.att)){
+				cout << opponent.name << "dropped " << opponent.att.name << "\n";
+				cout << "Pickup? \n 1)yes \n 2)no \n";
+				int option;
+				cin >> option;
+				switch(option){
+					case 1:
+						player.weapon = item(opponent.att.name, opponent.att.damage, opponenet.att.reliability);
+					break;}}
 			opponent.enemyDie(my); // kill off current enemy
 			opponent = enemy(); // spawn new enemy
 			cout << opponent.name << " has appeared \n"; // introduce new enemy
