@@ -16,3 +16,7 @@ int general::findLength(ifstream& file){
 	}
 	return i;
 }
+string general::randoName(){
+	/*liam put your shit here*/}
+string randomVerb(){
+	}
