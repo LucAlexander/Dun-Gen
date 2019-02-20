@@ -26,7 +26,7 @@ int main() {
 				case 1: // attack enemy
 					my.playerStrike(my.weapon, opponent);
 				break;
-				case 2: // block next turn
+				case 2: // parry next turn
 					my.block = true;
 				break;
 				case 3:
@@ -41,7 +41,7 @@ int main() {
 				case 1: // attack player
 					opponent.enemyStrike(my, opponent.att);
 				break;
-				case 2: // block next turn
+				case 2: // parry next turn
 					opponent.block = true;
 				break;
 				case 3:
