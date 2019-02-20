@@ -48,9 +48,10 @@ string player::printStats(){
 //--------------------------------------------------------------------------enemy----------------------------------
 //constructor
 enemy::enemy(){
+	general obj;
 	att = enemyAttack();
 	hp = ((rand() % 16) + 5);
-	name = randomName();
+	name = general.randomName();
 	background = description(name);
 	block = false;
 }
