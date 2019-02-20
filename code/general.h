@@ -7,4 +7,5 @@ using namespace std;
 class general{
 	public:
 		int findLength(ifstream& file);
+		string randomName();
 };
