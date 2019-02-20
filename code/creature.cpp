@@ -76,22 +76,3 @@ void enemy::enemyStrike(creature& pl, enemyAttack& att){
 		}
 	}
 }
-string enemy::randomName(){	
-	general obj = general();
-	ifstream infile;
-	infile.open("TextFiles/WordsToPlugIn/syllables.txt");
-	string syllables[obj.findLength(infile)];
-	if (infile.is_open()){
-		int i = 0;
-		while (infile.good()){
-			getline(infile, syllables[i], '\n');
-			i++;
-		}
-	}
-	infile.close();
-	string name;
-	//syllable ammount shoudl be random as well, so there shoudl be a chance for there to be a single syllable name
-	//code for randomize method goes here. append syllables to string called name:
-	//use the array called syllables[], it should have all the strings stored in it so long as you place all the syllables you want to use in the syllibles.txt file at TextFiles/Syllables.txt in the file directory in repl.it
-	return name;
-}
