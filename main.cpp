@@ -51,7 +51,8 @@ int main() {
 			turn *= -1; // change turn
 		} // ---------------------------------------------------------------------end round checks and specifications
 		if (opponent.hp <= 0){ // if opponent is dead;
-			cout << my.name << " defeated " << opponent.name << " using " << opponent.att.name << "\n"; // print tagline for defeating enemy
+			cout << my.name << " defeated " << opponent.name << " using " << my.weapon.name << "\n"; // print tagline for defeating enemy
+			opponenet.drop();
 			opponent.enemyDie(my); // kill off current enemy
 			opponent = enemy(); // spawn new enemy
 			cout << opponent.name << " has appeared \n"; // introduce new enemy
