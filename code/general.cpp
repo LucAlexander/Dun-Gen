@@ -10,6 +10,7 @@ int general::findLength(ifstream& file){
 	int i = 0;
 	if (file.is_open()){
 		while (file.good()){
+			infile.ignore(256,'\n');
 			i++;
 		}
 	}
