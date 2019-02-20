@@ -33,8 +33,10 @@ void player::playerDie(){
 	// what happens when the game ends/player dies
 }
 string player::printStats(){
-	//print name, health, weapon, and kills
+	string str;
+	//return a string with name, health, weapon, and kills
 	//weapon name, weapon damage, weapon reliability, and special
+	return str;
 }
 //--------------------------------------------------------------------------enemy----------------------------------
 //constructor
@@ -46,7 +48,9 @@ enemy::enemy(){
 }
 //functions
 string enemy::printStats(){
-	//print name, health, damage of attack
+	string str;
+	//return string with name, health, damage of attack
+	return str;
 }
 void enemy::enemyDie(creature& pl){
 	pl.kills++;
