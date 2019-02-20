@@ -76,3 +76,14 @@ void enemy::enemyStrike(creature& pl, enemyAttack& att){
 		}
 	}
 }
+bool enemy::willDrop(enemyAttack& att){
+	int startIndex = att.name.find(' ');
+	int size = att.name.length();
+	int endIndex = size-startIndex;
+	string str = att.name.substr(startIndex, endIndex);
+	int chance = (unsigned char)(str.at(0));
+	chance -= 96;
+	if (rand() % chance = chance){
+		return true;}
+	return false;
+}
