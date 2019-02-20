@@ -9,8 +9,9 @@ class description{
 		string earlyLife;
 		string characteristics;
 		string qualities;
+		string name;
 		//constructor
-		description();
+		description(string name);
 		//template filler functions
 		string fillLife(string str); // early life
 		string fillCharacteristics(string str); // description
