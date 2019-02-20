@@ -31,7 +31,7 @@ string general::randomName(){
 
 	//syllable ammount shoudl be random as well, so there shoudl be a chance for there to be a single syllable name
 	//code for randomize method goes here. append syllables to string called name:
-	//use the array called syllables[], it should have all the strings stored in it so long as you place all the syllables you want to use in the syllibles.txt file at TextFiles/Syllables.txt in the file directory in repl.it
+	//use the array called syllables[], it should have all the strings stored in it so long as you place all the syllables yo want to use in the syllibles.txt file at TextFiles/Syllables.txt in the file directory in repl.it
 	
 	string name;
 	int length = sizeof(syllables);
@@ -44,9 +44,15 @@ string general::randomName(){
 	}
 	return name;
 }
-string randomVerb();
-string randomParticipleAdj();
-string randomDescriptionAdj();
-string randomPersonalityAdj();
-string randomAdjective();
-string randomNoun();
+string randomVerb(){
+	}
+string randomParticipleAdj(){
+	}
+string randomDescriptionAdj(){
+	}
+string randomPersonalityAdj(){
+	}
+string randomAdjective(){
+	}
+string randomNoun(){
+	}
