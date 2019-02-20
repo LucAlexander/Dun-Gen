@@ -37,7 +37,18 @@ void player::playerStrike(item& weapon, creature& target){
 	}
 }
 void player::playerDie(){
-	// what happens when the game ends/player dies
+	string legacy;
+	if (kills / 5 < 1){
+		legacy = "rather poor";
+	}
+	else if (kills/5 > 1 && kills/5 < 2){
+		legacy = "pretty good";
+	}
+	else{
+		legacy = "epic";
+	}
+	cout << this.name << " had achieved " << this.kills << " kills \n";
+	cout << "His legacy was " << legacy << "\n";
 }
 string player::printStats(){
 	string str;
