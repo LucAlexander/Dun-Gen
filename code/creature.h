@@ -9,6 +9,7 @@ class creature{
 		int hp;
 		string name;
 		int kills;
+		bool block;
 };
 class player : public creature{
 	friend enemy;
