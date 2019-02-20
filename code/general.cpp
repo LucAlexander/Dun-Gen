@@ -34,7 +34,7 @@ string general::randomName(){
 	//use the array called syllables[], it should have all the strings stored in it so long as you place all the syllables you want to use in the syllibles.txt file at TextFiles/Syllables.txt in the file directory in repl.it
 	
 	string name;
-	int length = syllables.length();
+	int length = sizeof(syllables);
 	int chunks = rand() % 5;
 	int chunkselect;
 	for(int i = 1; i <= chunks; i++)
@@ -46,3 +46,9 @@ string general::randomName(){
 }
 string randomVerb(){
 	}
+string randomVerb();
+string randomParticipleAdj();
+string randomDescriptionAdj();
+string randomPersonalityAdj();
+string randomAdjective();
+string randomNoun();
