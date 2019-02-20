@@ -31,6 +31,9 @@ void player::playerStrike(item& weapon, creature& target){
 		if (target.block == false || blockchance == 3){
 			target.hp -= weapon.damage;
 		}
+		else if (blockchace <= 3){
+			target.block = false;
+		}
 	}
 }
 void player::playerDie(){
@@ -66,6 +69,9 @@ void enemy::enemyStrike(creature& pl, enemyAttack& att){
 	if (n <= att.reliability + pl.kills / 5){
 		if (pl.block == false || blockchance == 3){
 			pl.hp -= att.damage + pl.kills / 5;
+		}
+		else if (blockchance <= 2){
+			my.block = false;
 		}
 	}
 }
