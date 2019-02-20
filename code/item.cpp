@@ -15,7 +15,7 @@ item::item(){
 //functions
 string item::itemName(){
 	//reading through the file goes here
-	string name = randomAdjective() + randomNoun();
+	string name = "The" + randomAdjective() + randomNoun();
 	//function to generate name goes here
 	return name;
 }
