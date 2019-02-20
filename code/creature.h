@@ -29,7 +29,6 @@ class enemy : public creature{
 		enemyAttack att;
 		//functions
 		enemy(); // constructs hp, name
-		string randomName(); // generates random name
 		string printStats();
 		void enemyStrike(creature& pl, enemyAttack& att);
 		void enemyDie(creature& pl);
