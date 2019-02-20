@@ -44,8 +44,6 @@ string general::randomName(){
 	}
 	return name;
 }
-string randomVerb(){
-	}
 string randomVerb();
 string randomParticipleAdj();
 string randomDescriptionAdj();
