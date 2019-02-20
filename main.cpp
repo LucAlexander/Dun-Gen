@@ -14,7 +14,7 @@ int main() {
 	enemy opponent = enemy(); // instantiate first enemy
 	int turn = 1; // turn var [1 if player's, 2 if enemy's]
 	cout << my.printStats() << "\n";
-	cout << opponent.printStats << "\n";
+	cout << opponent.printStats() << "\n";
 	while(my.hp > 0){ // main loop: terminates upon player's death
 		if (turn){ // ---------------------------------------------------------------------player's turn
 			int choice;
@@ -59,8 +59,12 @@ int main() {
 				cin >> option;
 				switch(option){
 					case 1:
-						player.weapon = item(opponent.att.name, opponent.att.damage, opponenet.att.reliability);
-					break;}}
+						my.weapon = item(opponent.att.name, opponent.att.damage, opponenet.att.reliability);
+						cout << "You have pickd up " << my.weapon.name << "\n";
+						cout << my.printStats();
+					break;
+				}
+			}
 			opponent.enemyDie(my); // kill off current enemy
 			opponent = enemy(); // spawn new enemy
 			cout << opponent.name << " has appeared \n"; // introduce new enemy
