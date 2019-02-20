@@ -32,5 +32,5 @@ class enemy : public creature{
 		string printStats();
 		void enemyStrike(creature& pl, enemyAttack& att);
 		void enemyDie(creature& pl);
-		void drop(enemyAttack& att);
+		void willDrop(enemyAttack& att);
 };
