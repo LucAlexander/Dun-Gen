@@ -16,6 +16,15 @@ int general::findLength(ifstream& file){
 	}
 	return i;
 }
+void general::parse(string arr[], ifstream infile){
+	if (infile.is_open()){
+		int i = 0;
+		while (infile.good()){
+			getline(infile, arr[i], '\n');
+			i++;
+		}
+	}
+}
 string general::randomName(){
 	ifstream infile;
 	infile.open("TextFiles/WordsToPlugIn/syllables.txt");
@@ -45,15 +54,51 @@ string general::randomName(){
 	return name;
 }
 string general::randomVerb(){
-	
+	ifstream infile;
+	infile.open(/*place directory here*/);
+	string list[findlength(infile)];
+	parse(list, infile);
+	string word;
+	/*put code here, use list[] for list.*/
+	return word;
 	}
 string general::randomParticipleAdj(){
-	}
-string genera::randomDescriptionAdj(){
-	}
+	ifstream infile;
+	infile.open(/*place directory here*/);
+	string list[findlength(infile)];
+	parse(list, infile);
+	string word;
+	/*put code here, use list[] for list.*/
+	return word;}
+string general::randomDescriptionAdj(){
+	ifstream infile;
+	infile.open(/*place directory here*/);
+	string list[findlength(infile)];
+	parse(list, infile);
+	string word;
+	/*put code here, use list[] for list.*/
+	return word;}
 string general::randomPersonalityAdj(){
-	}
+	ifstream infile;
+	infile.open(/*place directory here*/);
+	string list[findlength(infile)];
+	parse(list, infile);
+	string word;
+	/*put code here, use list[] for list.*/
+	return word;}
 string general::randomAdjective(){
-	}
+	ifstream infile;
+	infile.open(/*place directory here*/);
+	string list[findlength(infile)];
+	parse(list, infile);
+	string word;
+	/*put code here, use list[] for list.*/
+	return word;}
 string general::randomNoun(){
-	}
+	ifstream infile;
+	infile.open(/*place directory here*/);
+	string list[findlength(infile)];
+	parse(list, infile);
+	string word;
+	/*put code here, use list[] for list.*/
+	return word;}
