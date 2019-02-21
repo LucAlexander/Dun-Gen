@@ -57,12 +57,13 @@ int main() {
 				cout << "Pickup? \n 1)yes \n 2)no \n";
 				int option;
 				cin >> option;
-				switch(option){
-					case 1:
-						my.weapon = item(opponent.att.name, opponent.att.damage, opponenet.att.reliability);
-						cout << "You have pickd up " << my.weapon.name << "\n";
-						cout << my.printStats();
-					break;
+				if (option == 1){
+					my.weapon = item(opponent.att.name, opponent.att.damage, opponenet.att.reliability);
+					cout << "You have pickd up " << my.weapon.name << "\n";
+					cout << my.printStats();
+				}
+				else{
+					cout "You have decided to leave behind " << opponent.att.name << "\n";
 				}
 			}
 			opponent.enemyDie(my); // kill off current enemy
@@ -74,6 +75,6 @@ int main() {
 			cout << opponent.printStats() << "\n";
 		}
 	}
-	my.playerDie();
 	cout << my.name << " has been defeated by " << opponent.name << " using " << opponent.att.name << "\n"; // print endgame
+	my.playerDie(); // print final outputs (legacy and stats etc)
 }
