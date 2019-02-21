@@ -58,6 +58,7 @@ string general::randomVerb(){
 	infile.open(/*place directory here*/);
 	string list[findlength(infile)];
 	parse(list, infile);
+	infile.close();
 	string word;
 	/*put code here, use list[] for list.*/
 	return word;
@@ -67,6 +68,7 @@ string general::randomParticipleAdj(){
 	infile.open(/*place directory here*/);
 	string list[findlength(infile)];
 	parse(list, infile);
+	infile.close();
 	string word;
 	/*put code here, use list[] for list.*/
 	return word;}
@@ -75,6 +77,7 @@ string general::randomDescriptionAdj(){
 	infile.open(/*place directory here*/);
 	string list[findlength(infile)];
 	parse(list, infile);
+	infile.close();
 	string word;
 	/*put code here, use list[] for list.*/
 	return word;}
@@ -83,6 +86,7 @@ string general::randomPersonalityAdj(){
 	infile.open(/*place directory here*/);
 	string list[findlength(infile)];
 	parse(list, infile);
+	infile.close();
 	string word;
 	/*put code here, use list[] for list.*/
 	return word;}
@@ -91,6 +95,7 @@ string general::randomAdjective(){
 	infile.open(/*place directory here*/);
 	string list[findlength(infile)];
 	parse(list, infile);
+	infile.close();
 	string word;
 	/*put code here, use list[] for list.*/
 	return word;}
@@ -99,6 +104,7 @@ string general::randomNoun(){
 	infile.open(/*place directory here*/);
 	string list[findlength(infile)];
 	parse(list, infile);
+	infile.close();
 	string word;
 	/*put code here, use list[] for list.*/
 	return word;}
