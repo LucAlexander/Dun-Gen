@@ -44,15 +44,15 @@ string general::randomName(){
 	}
 	return name;
 }
-string randomVerb(){
+string general::randomVerb(){
 	}
-string randomParticipleAdj(){
+string general::randomParticipleAdj(){
 	}
-string randomDescriptionAdj(){
+string genera::randomDescriptionAdj(){
 	}
-string randomPersonalityAdj(){
+string general::randomPersonalityAdj(){
 	}
-string randomAdjective(){
+string general::randomAdjective(){
 	}
-string randomNoun(){
+string general::randomNoun(){
 	}
