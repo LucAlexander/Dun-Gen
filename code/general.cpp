@@ -16,7 +16,7 @@ int general::findLength(ifstream& file){
 	}
 	return i;
 }
-void general::parse(string arr[], ifstream infile){
+void general::parse(string arr[], ifstream& infile){
 	if (infile.is_open()){
 		int i = 0;
 		while (infile.good()){
