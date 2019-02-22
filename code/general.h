@@ -14,5 +14,6 @@ class general{
 		string randomPersonalityAdj();
 		string randomAdjective();
 		string randomNoun();
+		string pullRandom(ifstream& infile);
 		void parse(string arr[], ifstream infile);
 };
