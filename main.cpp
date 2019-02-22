@@ -10,7 +10,18 @@
 #include "code/creature.h"
 using namespace std;
 int main() {
-	player my = player(); // instantiate player
+	int namechoice;
+	cout << "Hello player, would you like to choose your own name, or have a random one \n 1) random \n 2) choose \n";
+	cin >> namechoice;
+	if (namechoice == 1){
+		player my = player(); // instantiate player
+	}
+	else if namechoice == 2){
+		string playerchoicename;
+		cout << "name: \n";
+		cin >> playerchoicename;
+		player my = player(playerchoicename); // instantiate player
+	}
 	enemy opponent = enemy(); // instantiate first enemy
 	int turn = 1; // turn var [1 if player's, 2 if enemy's]
 	cout << my.printStats() << "\n";
