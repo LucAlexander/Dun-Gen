@@ -53,6 +53,14 @@ string general::randomName(){
 	}
 	return name;
 }
+string general::pullRandom(ifstream& infile){
+	string name;
+	stirng list[findlength(infile)];
+	parse(list, infile);
+	infile.close();
+	//code here
+	return name;
+}
 string general::randomVerb(){
 	ifstream infile;
 	infile.open(/*place directory here*/);
