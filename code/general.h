@@ -8,12 +8,6 @@ class general{
 	public:
 		int findLength(ifstream& file);
 		string randomName();
-		string randomVerb();
-		string randomParticipleAdj();
-		string randomDescriptionAdj();
-		string randomPersonalityAdj();
-		string randomAdjective();
-		string randomNoun();
 		string pullRandom(ifstream& infile);
 		void parse(string arr[], ifstream infile);
 };
