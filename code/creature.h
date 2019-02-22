@@ -16,6 +16,7 @@ class player : public creature{
 	public:
 		item weapon;
 		player();
+		player(string choice);
 		void playerStrike(item& weapon, creature& target);
 		void playerDie();
 		string chooseName();
