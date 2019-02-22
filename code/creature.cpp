@@ -21,7 +21,7 @@ player::player(){
 //functions
 string player::chooseName(){
 	string str;
-	//chopose random name from either list/array or read in from file
+	
 	return str;
 }
 void player::playerStrike(item& weapon, creature& target){
