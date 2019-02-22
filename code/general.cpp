@@ -5,7 +5,7 @@
 #include <fstream>
 #include "general.h"
 using namespace std;
-//functions---------------------------------- add functions here for general use across classes
+//functions---------------------------------- add functions here for general use across classes, dont forget to declare in header file aswell
 int general::findLength(ifstream& file){
 	int i = 0;
 	if (file.is_open()){
@@ -55,9 +55,10 @@ string general::randomName(){
 }
 string general::pullRandom(ifstream& infile){
 	string name;
-	stirng list[findlength(infile)];
+	string list[findlength(infile)];
 	parse(list, infile);
 	infile.close();
 	//code here
+	//this should pull a random string index the  list array and place that into 'name'
 	return name;
 }
