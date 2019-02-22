@@ -18,6 +18,13 @@ player::player(){
 	name = chooseName();
 	block = false;
 }
+player::player(string choice){
+	kills = 0;
+	hp = 30;
+	weapon = item();
+	name = choice;
+	block = false;
+}
 //functions
 string player::chooseName(){
 	string str;
