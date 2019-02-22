@@ -47,7 +47,9 @@ string description::fillLife(string str){
 	}
 	while(desc.find("%V")!=desc.npos())
 	{
-		temp = obj.randomVerb();
+		ifstream infile;
+		infile.open("TextFiles/WordsToPlugIn/verb.txt");
+		temp = obj.pullWord(infile);
 		desc.replace(desc.find("%V"), temp.length(), temp);
 	}
 	while(desc.find("%A")!=desc.npos())
