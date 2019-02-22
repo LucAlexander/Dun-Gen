@@ -34,47 +34,61 @@ string description::fillLife(string str){
 	{
 		cout << "Error opening file";
 	}
-	// write function to fill in template.
-	// use directory: TextFiles/Formats/earlyLife, and TextFiles/WordsToPlugIn/... for adjectives, participles, and nouns to plug in.
-	while(desc.find("$M")!=desc.npos())
+	while(desc.find("$M")!=desc.npos()) // existing name
 	{
 		desc.replace(desc.find("$M"), name.length(), name);
 	}
-	while(desc.find("%M")!=desc.npos())
+	while(desc.find("%M")!=desc.npos()) // filling random name(a new one)
 	{
 		temp = obj.randomName();
 		desc.replace(desc.find("%M"), temp.length(), temp);
 	}
-	while(desc.find("%V")!=desc.npos())
+	while(desc.find("%V")!=desc.npos()) // verbs
 	{
-		ifstream infile;
 		infile.open("TextFiles/WordsToPlugIn/verb.txt");
-		temp = obj.pullWord(infile);
+		temp = obj.pullRandom(infile);
 		desc.replace(desc.find("%V"), temp.length(), temp);
 	}
-	while(desc.find("%A")!=desc.npos())
+	while(desc.find("%A")!=desc.npos()) // all adjectives
 	{
-		temp = obj.randomAdjective();
+		int choice = rand() %3 + 1;
+		switch (choice){
+			case 1:
+				infile.open("TextFiles/WordsToPlugIn/participleAdjectives.txt");
+			break;
+			case 2:
+				infile.open("TextFiles/WordsToPlugIn/descriptionAdjectives.txt");
+			break;
+			case 3:
+			defaullt:
+				infile.open("TextFiles/WordsToPlugIn/personalityAdjectives.txt");
+			break;
+		}
+		temp = obj.pullRandom(infile);
 		desc.replace(desc.find("%A"), temp.length(), temp);
 	}
-	while(desc.find("%P")!=desc.npos())
+	while(desc.find("%P")!=desc.npos()) // participle adj
 	{
-		temp = obj.randomParticipleAdj();
+		infile.open("TextFiles/WordsToPlugIn/participleAdjectives.txt");
+		temp = obj.pullRandom(infile);
 		desc.replace(desc.find("%P"), temp.length(), temp);
 	}
-	while(desc.find("%D")!=desc.npos())
+	while(desc.find("%D")!=desc.npos()) // description adj
 	{
-		temp = obj.randomDescriptionAdj();
+		infile.open("TextFiles/WordsToPlugIn/descriptionAdjectives.txt");
+		temp = obj.pullRandom(infile);
 		desc.replace(desc.find("%D"), temp.length(), temp);
 	}
-	while(desc.find("%E")!=desc.npos())
+	while(desc.find("%E")!=desc.npos()) // personality adj
 	{
-		temp = obj.randomPersonalityAdj();
+		infile.open("TextFiles/WordsToPlugIn/personalityAdjectives.txt");
+		temp = obj.pullRandom(infile);
 		desc.replace(desc.find("%E"), temp.length(), temp);
 	}
-	while(desc.find("%O")!=desc.npos())
+	while(desc.find("%O")!=desc.npos()) // nouns
 	{
-		temp = obj.randomNoun();
+		infile.open("TextFiles/WordsToPlugIn/nouns.txt");
+		temp = obj.pullRandom(infile);
 		desc.replace(desc.find("%O"), temp.length(), temp);
 	}
 	return desc;
@@ -100,46 +114,62 @@ string description::fillCharacteristics(string str){
 	{
 		cout << "Error opening file";
 	}
-	while(desc.find("$M")!=desc.npos())
+	while(desc.find("$M")!=desc.npos()) // existing name
 	{
 		desc.replace(desc.find("$M"), name.length(), name);
 	}
-	while(desc.find("%M")!=desc.npos())
+	while(desc.find("%M")!=desc.npos()) // filling random name(a new one)
 	{
 		temp = obj.randomName();
 		desc.replace(desc.find("%M"), temp.length(), temp);
 	}
-	while(desc.find("%V")!=desc.npos())
+	while(desc.find("%V")!=desc.npos()) // verbs
 	{
-		temp = obj.randomVerb();
+		infile.open("TextFiles/WordsToPlugIn/verb.txt");
+		temp = obj.pullRandom(infile);
 		desc.replace(desc.find("%V"), temp.length(), temp);
 	}
-	while(desc.find("%A")!=desc.npos())
+	while(desc.find("%A")!=desc.npos()) // all adjectives
 	{
-		temp = obj.randomAdjective();
+		int choice = rand() %3 + 1;
+		switch (choice){
+			case 1:
+				infile.open("TextFiles/WordsToPlugIn/participleAdjectives.txt");
+			break;
+			case 2:
+				infile.open("TextFiles/WordsToPlugIn/descriptionAdjectives.txt");
+			break;
+			case 3:
+			defaullt:
+				infile.open("TextFiles/WordsToPlugIn/personalityAdjectives.txt");
+			break;
+		}
+		temp = obj.pullRandom(infile);
 		desc.replace(desc.find("%A"), temp.length(), temp);
 	}
-	while(desc.find("%P")!=desc.npos())
+	while(desc.find("%P")!=desc.npos()) // participle adj
 	{
-		temp = obj.randomParticipleAdj();
+		infile.open("TextFiles/WordsToPlugIn/participleAdjectives.txt");
+		temp = obj.pullRandom(infile);
 		desc.replace(desc.find("%P"), temp.length(), temp);
 	}
-	while(desc.find("%D")!=desc.npos())
+	while(desc.find("%D")!=desc.npos()) // description adj
 	{
-		temp = obj.randomDescriptionAdj();
+		infile.open("TextFiles/WordsToPlugIn/descriptionAdjectives.txt");
+		temp = obj.pullRandom(infile);
 		desc.replace(desc.find("%D"), temp.length(), temp);
 	}
-	while(desc.find("%E")!=desc.npos())
+	while(desc.find("%E")!=desc.npos()) // personality adj
 	{
-		temp = obj.randomPersonalityAdj();
+		infile.open("TextFiles/WordsToPlugIn/personalityAdjectives.txt");
+		temp = obj.pullRandom(infile);
 		desc.replace(desc.find("%E"), temp.length(), temp);
 	}
-	while(desc.find("%O")!=desc.npos())
+	while(desc.find("%O")!=desc.npos()) // nouns
 	{
-		temp = obj.randomNoun();
+		infile.open("TextFiles/WordsToPlugIn/nouns.txt");
+		temp = obj.pullRandom(infile);
 		desc.replace(desc.find("%O"), temp.length(), temp);
 	}
 	return desc;
-	 // write function to fill in template. 
-	 // use directory TextFiles/Formats/characteristics for template directory, and TextFiles/WordsToPlugIn/... for adjectives, participles, and nouns to plug in.
 }
