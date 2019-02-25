@@ -58,7 +58,7 @@ string general::pullRandom(ifstream& infile){
 	string list[findlength(infile)];
 	parse(list, infile);
 	infile.close();
-	//code here
-	//this should pull a random string index the  list array and place that into 'name'
+	int stopper = rand() % sizeof(list);
+	name = list[stopper];
 	return name;
 }
