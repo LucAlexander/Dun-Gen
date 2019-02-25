@@ -59,11 +59,13 @@ void player::playerDie(){
 	cout << this.name << " had achieved " << this.kills << " kills \n";
 	cout << "His legacy was " << legacy << "\n";
 }
-string player::printStats(){
-	string str;
+void player::printStats(){
+	cout << "Your name is " << this.name << ". \n"; 
+	cout <<	"Your health is at " << this.hp << ". \n";
+	cout << "You wield the" << this.weapon.name << ", which does " << this.weapon.damage << " damage. \n";
+	cout << this.weapon.name << "is at" << this.weapon.reliability << "/10 reliability.";
 	//return a string with name, health, weapon, and kills
 	//weapon name, weapon damage, weapon reliability, and special
-	return str;
 }
 //--------------------------------------------------------------------------enemy----------------------------------
 //constructor
