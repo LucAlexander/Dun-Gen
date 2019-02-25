@@ -79,9 +79,8 @@ enemy::enemy(){
 }
 //functions
 string enemy::printStats(){
-	string str;
-	//return string with name, health, damage of attack
-	return str;
+	cout << this.name << " weilds the " << this.weapon.name << ", a weapon which does " << this.weapon.damage << " damage";
+	cout << this.name << " has a health of "
 }
 void enemy::enemyDie(creature& pl){
 	pl.kills++;
