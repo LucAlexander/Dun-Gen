@@ -20,7 +20,7 @@ class player : public creature{
 		void playerStrike(item& weapon, creature& target);
 		void playerDie();
 		string chooseName();
-		string printStats();
+		void printStats();
 };
 class enemy : public creature{
 	friend player;
@@ -30,7 +30,7 @@ class enemy : public creature{
 		enemyAttack att;
 		//functions
 		enemy(); // constructs hp, name
-		string printStats();
+		void printStats();
 		void enemyStrike(creature& pl, enemyAttack& att);
 		void enemyDie(creature& pl);
 		void willDrop(enemyAttack& att);
