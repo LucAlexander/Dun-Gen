@@ -83,7 +83,11 @@ int main() {
 			cout << opponent.background.earlyLife << "\n"; // early life of the enemy
 			cout << opponent.background.characteristics << "\n"; // description
 			cout << opponent.background.qualities << "\n"; // stats
-			cout << opponent.printStats() << "\n";
+			cout << opponent.printStats() << "\n \n";
+			cout << "Would you like to go to the door to your left, or to your right? \n 1)left \n 2)right";
+			int dir;
+			cin >> dir;
+			cout << \n;
 		}
 	}
 	cout << my.name << " has been defeated by " << opponent.name << " using " << opponent.att.name << "\n"; // print endgame
