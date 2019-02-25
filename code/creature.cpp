@@ -28,7 +28,9 @@ player::player(string choice){
 //functions
 string player::chooseName(){
 	string str;
-	
+	ifstream infile;
+	infile.open("TextFiles/WordsToPlugIn/playerNames.txt")
+	str = pullRandom(infile);
 	return str;
 }
 void player::playerStrike(item& weapon, creature& target){
