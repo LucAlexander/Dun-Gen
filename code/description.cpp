@@ -96,6 +96,7 @@ string description::fillLife(string str){
 }
 string description::fillCharacteristics(string str){
 	// read in template
+	ifstream infile;
 	string desc;
 	string temp;
 	general obj;
