@@ -64,8 +64,6 @@ void player::printStats(){
 	cout <<	"Your health is at " << this.hp << ". \n";
 	cout << "You wield the" << this.weapon.name << ", which does " << this.weapon.damage << " damage. \n";
 	cout << this.weapon.name << "is at" << this.weapon.reliability << "/10 reliability.";
-	//return a string with name, health, weapon, and kills
-	//weapon name, weapon damage, weapon reliability, and special
 }
 //--------------------------------------------------------------------------enemy----------------------------------
 //constructor
@@ -79,8 +77,9 @@ enemy::enemy(){
 }
 //functions
 string enemy::printStats(){
-	cout << this.name << " weilds the " << this.weapon.name << ", a weapon which does " << this.weapon.damage << " damage";
-	cout << this.name << " has a health of "
+	cout << this.name << " weilds " << this.weapon.name << ", a weapon which does " << this.weapon.damage << " damage \n";
+	cout << "This weapon has a reliability of " << this.weapon.reliability << "/10 reliability \n";
+	cout << this.name << " has a health of " << this.hp << "\n";
 }
 void enemy::enemyDie(creature& pl){
 	pl.kills++;
