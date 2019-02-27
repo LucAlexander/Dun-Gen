@@ -1,1 +1,3 @@
-#The $M's $O was $P, as it $Vs towards you.
+#The $M's %O was %P, as it %Vs towards you.
+#The $M has %P %O, causing %E.
+#AS %N once said, it's %O are %D.
