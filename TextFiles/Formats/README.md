@@ -1,1 +1,1 @@
-yeet yeet skeet skeet
+CHARACTERISTICS - description of monster as you first encounter it
