@@ -4,10 +4,12 @@ ark
 aw
 az
 bar
+ban
 bite
 bo
 bum
 chie
+coo
 chu
 chum
 din
@@ -15,6 +17,7 @@ doe
 dor
 dos
 eem
+el
 er
 et
 fi
@@ -47,6 +50,9 @@ monk
 moth
 my
 nerd
+oa
+op
+oph
 pa
 par
 paw
@@ -60,6 +66,7 @@ ram
 rath
 raz
 ree
+s
 ske
 sur
 ta
