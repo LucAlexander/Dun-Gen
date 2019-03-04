@@ -1,6 +1,6 @@
 #With the $W, the $M %Vs you.
 #Using its $W, it %Vs you.
-#Jumping from a %A %O in the corner, the $M %Vs you.
+#Jumping from a %A %O, the $M %Vs you.
 #Out of the blue, a %M %Vs in and %Vs you.
 #The $M grabs you and %Vs you into the wall.
 #The $M feints and %Vs its $W into you while you were not looking.
@@ -12,4 +12,6 @@
 #Oof, owie, ouch! The $M %Vs you!
 #With its $W, the $M $Vs you.
 #The $M %Vs a %O into you.
-#The %M's $W hits your arm, %P you slightly.
+#The $M's $W hits your arm, %P you slightly.
+#The $M %Vs you into the upper exosphere, turning you into a fireball on the way down.
+#The $M uses its %O powers to %V you.
