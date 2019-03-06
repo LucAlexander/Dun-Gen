@@ -15,3 +15,10 @@
 #The $M's $W hits your arm, %P you slightly.
 #The $M %Vs you into the upper exosphere, turning you into a fireball on the way down.
 #The $M uses its %O powers to %V you.
+#You trip. The $M %Vs at you in confusion.
+#With its %D $W, the $M %Vs you.
+#You see the monster's %D $W %V, %P you.
+#A possessed %O appears and %Vs you over.
+#A knock to the head leaves you %P %Os.
+#You get %Ved by the $M's $W
+#%P your $L with its $W, the $M %Vs you.
