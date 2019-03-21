@@ -1,5 +1,4 @@
 abstract
-abstract
 accelerate
 acclimate
 accommodate
