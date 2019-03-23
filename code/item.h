@@ -4,13 +4,13 @@
 #include <sstream>
 #include <fstream>
 using namespace std;
-class item{
+class item {
 	public:
 		string name;
 		int damage;
 		int reliability;
 		int special;
-		item();
-		item(string name, int damage, int reliability);
+		item(); // start weapon constructor
+		item(string name, int damage, int reliability); // weapon drop constructor
 		string itemName();
 };
