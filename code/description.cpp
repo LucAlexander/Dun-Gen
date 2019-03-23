@@ -1,176 +1,204 @@
 #include <iostream>
 #include <string>
 #include <stdlib.h>
-#include <sstream>
 #include <fstream>
+#include <istream>
 #include "description.h"
 #include "general.h"
 using namespace std;
 //constructor
-description::description(string n){
-	earlyLife = fillLife(earlyLife);
-	characteristics = fillCharacteristics(characteristics);
+description::description() {
+	earlyLife = "";
+	characteristics = "";
+	name = "";
+}
+description::description(string n) {
+	earlyLife = fillLife();
+	cout << " !!!! \n";
+	characteristics = fillCharacteristics();
 	name = n;
 }
 //functions
-string description::fillLife(string str){
+string description::fillLife() {
 	// read in template
 	ifstream infile;
 	string desc;
 	string temp;
 	general obj;
-	infile.open ("TextFiles/Formats/earlyLife.txt");
+	infile.open("./earlyLife.txt");
 	if (infile.is_open())
 	{
-		int   c=PLACEHOLDER_AMT_OF_TEMPLATES;
-		int val = rand() % c;
-		for(int i = 0;i<val;i++)
+		int   c = 2; //PLACEHOLDER_AMT_OF_TEMPLATES; should be one less than the ammount of templates
+		int val = rand() % c + 1;
+		for (int i = 0; i < val; i++)
 		{
-			infile.ignore(256, "/n");
+			infile.ignore(256, '\n');
 		}
-		infile.getline(desc, 256, '/n');
-		infile.close();
+		getline(infile, desc);
 	}
 	else
 	{
 		cout << "Error opening file";
 	}
-	while(desc.find("$M")!=desc.npos()) // existing name
+	infile.close();
+	while (desc.find("$M") != string::npos) // existing name
 	{
+		cout << " $M \n";
 		desc.replace(desc.find("$M"), name.length(), name);
 	}
-	while(desc.find("%M")!=desc.npos()) // filling random name(a new one)
+	while (desc.find("%M") != string::npos) // filling random name(a new one)
 	{
-		temp = obj.randomName();
+		cout << " %m \n";
+		temp = obj.randomSyllableName();
 		desc.replace(desc.find("%M"), temp.length(), temp);
 	}
-	while(desc.find("%V")!=desc.npos()) // verbs
+	while (desc.find("%V") != string::npos) // verbs
 	{
-		infile.open("TextFiles/WordsToPlugIn/verb.txt");
-		temp = obj.pullRandom(infile);
+		cout << "%v \n ";
+		const char* dir = "./verb.txt";
+		temp = obj.pullRandom(dir);
 		desc.replace(desc.find("%V"), temp.length(), temp);
 	}
-	while(desc.find("%A")!=desc.npos()) // all adjectives
+	while (desc.find("%A") != string::npos) // all adjectives
 	{
-		int choice = rand() %3 + 1;
-		switch (choice){
-			case 1:
-				infile.open("TextFiles/WordsToPlugIn/participleAdjectives.txt");
+		cout << "%A \n ";
+		int choice = rand() % 3 + 1;
+		const char* dir = "./participleAdjectives.txt";
+		const char* dir1 = "./descriptionAdjectives.txt";
+		const char* dir2 = "./personalityAdjectives.txt";
+		switch (choice) {
+		case 1:
+			temp = obj.pullRandom(dir2);
+			desc.replace(desc.find("%A"), temp.length(), temp);
 			break;
-			case 2:
-				infile.open("TextFiles/WordsToPlugIn/descriptionAdjectives.txt");
+		case 2:
+			temp = obj.pullRandom(dir1);
+			desc.replace(desc.find("%A"), temp.length(), temp);
 			break;
-			case 3:
-			defaullt:
-				infile.open("TextFiles/WordsToPlugIn/personalityAdjectives.txt");
+		case 3:
+			temp = obj.pullRandom(dir2);
+			desc.replace(desc.find("%A"), temp.length(), temp);
+			break;
+		default:
+			temp = obj.pullRandom(dir2);
+			desc.replace(desc.find("%A"), temp.length(), temp);
 			break;
 		}
-		temp = obj.pullRandom(infile);
-		desc.replace(desc.find("%A"), temp.length(), temp);
 	}
-	while(desc.find("%P")!=desc.npos()) // participle adj
+	while (desc.find("%P") != string::npos) // participle adj
 	{
-		infile.open("TextFiles/WordsToPlugIn/participleAdjectives.txt");
-		temp = obj.pullRandom(infile);
+		cout << "%p \n ";
+		const char* dir = "./participleAdjectives.txt";
+		temp = obj.pullRandom(dir);
 		desc.replace(desc.find("%P"), temp.length(), temp);
 	}
-	while(desc.find("%D")!=desc.npos()) // description adj
+	while (desc.find("%D") != string::npos) // description adj
 	{
-		infile.open("TextFiles/WordsToPlugIn/descriptionAdjectives.txt");
-		temp = obj.pullRandom(infile);
+		cout << "%D \n ";
+		const char* dir = "./descriptionAdjectives.txt";
+		temp = obj.pullRandom(dir);
 		desc.replace(desc.find("%D"), temp.length(), temp);
 	}
-	while(desc.find("%E")!=desc.npos()) // personality adj
+	while (desc.find("%E") != string::npos) // personality adj
 	{
-		infile.open("TextFiles/WordsToPlugIn/personalityAdjectives.txt");
-		temp = obj.pullRandom(infile);
+		cout << "%E \n ";
+		const char* dir = "./personalityAdjectives.txt";
+		temp = obj.pullRandom(dir);
 		desc.replace(desc.find("%E"), temp.length(), temp);
 	}
-	while(desc.find("%O")!=desc.npos()) // nouns
+	while (desc.find("%O") != string::npos) // nouns
 	{
-		infile.open("TextFiles/WordsToPlugIn/nouns.txt");
-		temp = obj.pullRandom(infile);
+		cout << "%O \n ";
+		const char* dir = "./nouns.txt";
+		temp = obj.pullRandom(dir);
 		desc.replace(desc.find("%O"), temp.length(), temp);
 	}
 	return desc;
 }
-string description::fillCharacteristics(string str){
+string description::fillCharacteristics() {
 	// read in template
 	ifstream infile;
 	string desc;
 	string temp;
 	general obj;
-	infile.open ("TextFiles/Formats/characteristics.txt");
+	infile.open("./characteristics.txt");
 	if (infile.is_open())
 	{
-		int   c=PLACEHOLDER_AMT_OF_TEMPLATES;
+		int   c = 0; //PLACEHOLDER_AMT_OF_TEMPLATES; should be one less than the ammount of templates
 		int val = rand() % c;
-		for(int i = 0;i<val;i++)
+		for (int i = 0; i < val; i++)
 		{
-			infile.ignore(256, "/n");
+			infile.ignore(256, '\n');
 		}
-		infile.getline(desc, 256, '/n');
-		infile.close();
+		getline(infile, desc);
 	}
 	else
 	{
 		cout << "Error opening file";
 	}
-	while(desc.find("$M")!=desc.npos()) // existing name
+	infile.close();
+	while (desc.find("$M") != string::npos) // existing name
 	{
 		desc.replace(desc.find("$M"), name.length(), name);
 	}
-	while(desc.find("%M")!=desc.npos()) // filling random name(a new one)
+	while (desc.find("%M") != string::npos) // filling random name(a new one)
 	{
-		temp = obj.randomName();
+		temp = obj.randomSyllableName();
 		desc.replace(desc.find("%M"), temp.length(), temp);
 	}
-	while(desc.find("%V")!=desc.npos()) // verbs
+	while (desc.find("%V") != string::npos) // verbs
 	{
-		infile.open("TextFiles/WordsToPlugIn/verb.txt");
-		temp = obj.pullRandom(infile);
+		const char* dir = "./verb.txt";
+		temp = obj.pullRandom(dir);
 		desc.replace(desc.find("%V"), temp.length(), temp);
 	}
-	while(desc.find("%A")!=desc.npos()) // all adjectives
+	while (desc.find("%A") != string::npos) // all adjectives
 	{
-		int choice = rand() %3 + 1;
-		switch (choice){
-			case 1:
-				infile.open("TextFiles/WordsToPlugIn/participleAdjectives.txt");
+		int choice = rand() % 3 + 1;
+		const char* dir = "./participleAdjectives.txt";
+		const char* dir1 = "./descriptionAdjectives.txt";
+		const char* dir2 = "./personalityAdjectives.txt";
+		switch (choice) {
+		case 1:
+			temp = obj.pullRandom(dir2);
+			desc.replace(desc.find("%A"), temp.length(), temp);
 			break;
-			case 2:
-				infile.open("TextFiles/WordsToPlugIn/descriptionAdjectives.txt");
+		case 2:
+			temp = obj.pullRandom(dir1);
+			desc.replace(desc.find("%A"), temp.length(), temp);
 			break;
-			case 3:
-			defaullt:
-				infile.open("TextFiles/WordsToPlugIn/personalityAdjectives.txt");
+		case 3:
+			temp = obj.pullRandom(dir2);
+			desc.replace(desc.find("%A"), temp.length(), temp);
+			break;
+		default:
+			temp = obj.pullRandom(dir2);
+			desc.replace(desc.find("%A"), temp.length(), temp);
 			break;
 		}
-		temp = obj.pullRandom(infile);
-		desc.replace(desc.find("%A"), temp.length(), temp);
 	}
-	while(desc.find("%P")!=desc.npos()) // participle adj
+	while (desc.find("%P") != string::npos) // participle adj
 	{
-		infile.open("TextFiles/WordsToPlugIn/participleAdjectives.txt");
-		temp = obj.pullRandom(infile);
+		const char* dir = "./participleAdjectives.txt";
+		temp = obj.pullRandom(dir);
 		desc.replace(desc.find("%P"), temp.length(), temp);
 	}
-	while(desc.find("%D")!=desc.npos()) // description adj
+	while (desc.find("%D") != string::npos) // description adj
 	{
-		infile.open("TextFiles/WordsToPlugIn/descriptionAdjectives.txt");
-		temp = obj.pullRandom(infile);
+		const char* dir = "./descriptionAdjectives.txt";
+		temp = obj.pullRandom(dir);
 		desc.replace(desc.find("%D"), temp.length(), temp);
 	}
-	while(desc.find("%E")!=desc.npos()) // personality adj
+	while (desc.find("%E") != string::npos) // personality adj
 	{
-		infile.open("TextFiles/WordsToPlugIn/personalityAdjectives.txt");
-		temp = obj.pullRandom(infile);
+		const char* dir = "./personalityAdjectives.txt";
+		temp = obj.pullRandom(dir);
 		desc.replace(desc.find("%E"), temp.length(), temp);
 	}
-	while(desc.find("%O")!=desc.npos()) // nouns
+	while (desc.find("%O") != string::npos) // nouns
 	{
-		infile.open("TextFiles/WordsToPlugIn/nouns.txt");
-		temp = obj.pullRandom(infile);
+		const char* dir = "./nouns.txt";
+		temp = obj.pullRandom(dir);
 		desc.replace(desc.find("%O"), temp.length(), temp);
 	}
 	return desc;
