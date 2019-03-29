@@ -91,6 +91,7 @@ string description::fillTemplate(const char* dir){
 			desc.erase(desc.find(reps[i]), 2);
 		}
 	}
+	return desc;
 }
 //functions
 string description::fillLife() {
