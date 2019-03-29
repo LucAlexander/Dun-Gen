@@ -67,20 +67,24 @@ string description::fillLife() {
 		const char* dir2 = "./personalityAdjectives.txt";
 		switch (choice) {
 		case 1:
-			temp = obj.pullRandom(dir2);
-			desc.replace(desc.find("%A"), temp.length(), temp);
+			temp = obj.pullRandom(dir);
+			desc.insert(desc.find("%A") + 2, temp);
+			desc.erase(desc.find("%A"), 2);
 			break;
 		case 2:
 			temp = obj.pullRandom(dir1);
-			desc.replace(desc.find("%A"), temp.length(), temp);
+			desc.insert(desc.find("%A") + 2, temp);
+			desc.erase(desc.find("%A"), 2);
 			break;
 		case 3:
 			temp = obj.pullRandom(dir2);
-			desc.replace(desc.find("%A"), temp.length(), temp);
+			desc.insert(desc.find("%A") + 2, temp);
+			desc.erase(desc.find("%A"), 2);
 			break;
 		default:
 			temp = obj.pullRandom(dir2);
-			desc.replace(desc.find("%A"), temp.length(), temp);
+			desc.insert(desc.find("%A") + 2, temp);
+			desc.erase(desc.find("%A"), 2);
 			break;
 		}
 	}
@@ -163,20 +167,24 @@ string description::fillCharacteristics() {
 		const char* dir2 = "./personalityAdjectives.txt";
 		switch (choice) {
 		case 1:
-			temp = obj.pullRandom(dir2);
-			desc.replace(desc.find("%A"), temp.length(), temp);
+			temp = obj.pullRandom(dir);
+			desc.insert(desc.find("%A") + 2, temp);
+			desc.erase(desc.find("%A"), 2);
 			break;
 		case 2:
 			temp = obj.pullRandom(dir1);
-			desc.replace(desc.find("%A"), temp.length(), temp);
+			desc.insert(desc.find("%A") + 2, temp);
+			desc.erase(desc.find("%A"), 2);
 			break;
 		case 3:
 			temp = obj.pullRandom(dir2);
-			desc.replace(desc.find("%A"), temp.length(), temp);
+			desc.insert(desc.find("%A") + 2, temp);
+			desc.erase(desc.find("%A"), 2);
 			break;
 		default:
 			temp = obj.pullRandom(dir2);
-			desc.replace(desc.find("%A"), temp.length(), temp);
+			desc.insert(desc.find("%A") + 2, temp);
+			desc.erase(desc.find("%A"), 2);
 			break;
 		}
 	}
