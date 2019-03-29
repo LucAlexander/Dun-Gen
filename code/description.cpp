@@ -17,6 +17,81 @@ description::description(string n) {
 	characteristics = fillCharacteristics();
 	name = n;
 }
+string description::fillTemplate(const char* dir){
+	// read in template
+	ifstream infile;
+	string desc;
+	string temp;
+	general obj;
+	infile.open(dir);
+	if (infile.is_open())
+	{
+		int c = 2; //PLACEHOLDER_AMT_OF_TEMPLATES; should be one less than the ammount of templates
+		int val = rand() % c + 1;
+		for (int i = 0; i < val; i++)
+		{
+			infile.ignore(256, '\n');
+		}
+		getline(infile, desc);
+	}
+	else
+	{
+		cout << "Error opening file";
+	}
+	infile.close();
+	const char* dirs[] = {"./verb.txt", "./nouns", "./participleAdjectives.txt", "./descriptionAdjectives.txt", "./personalityAdjectives.txt"};
+	string reps[] = {"%V", "%O", "%P", "%D", "%E"};
+	while (desc.find("$M") != string::npos) // existing name
+	{
+		desc.insert(desc.find("$M") + 2, name);
+		desc.erase(desc.find("$M"), 2);
+	}
+	while (desc.find("%M") != string::npos) // filling random name(a new one)
+	{
+		temp = obj.randomSyllableName();
+		desc.insert(desc.find("%M") + 2, temp);
+		desc.erase(desc.find("%M"), 2);
+		
+	}
+	while (desc.find("%A") != string::npos) // all adjectives
+	{
+		int choice = rand() % 3 + 1;
+		const char* dir = dirs[2];
+		const char* dir1 = dirs[3];
+		const char* dir2 = dirs[4];
+		switch (choice) {
+		case 1:
+			temp = obj.pullRandom(dir);
+			desc.insert(desc.find("%A") + 2, temp);
+			desc.erase(desc.find("%A"), 2);
+			break;
+		case 2:
+			temp = obj.pullRandom(dir1);
+			desc.insert(desc.find("%A") + 2, temp);
+			desc.erase(desc.find("%A"), 2);
+			break;
+		case 3:
+			temp = obj.pullRandom(dir2);
+			desc.insert(desc.find("%A") + 2, temp);
+			desc.erase(desc.find("%A"), 2);
+			break;
+		default:
+			temp = obj.pullRandom(dir2);
+			desc.insert(desc.find("%A") + 2, temp);
+			desc.erase(desc.find("%A"), 2);
+			break;
+		}
+	}
+	for (int i = 0;i<5;i++){
+		while (desc.find(reps[i]) != string::npos) // verbs
+		{
+			const char* curdir = dirs[i];
+			temp = obj.pullRandom(curdir);
+			desc.insert(desc.find(reps[i]) + 2, temp);
+			desc.erase(desc.find(reps[i]), 2);
+		}
+	}
+}
 //functions
 string description::fillLife() {
 	// read in template
