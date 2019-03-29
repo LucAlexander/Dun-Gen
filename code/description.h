@@ -16,4 +16,5 @@ public:
 	//template filler functions
 	string fillLife(); // early life
 	string fillCharacteristics(); // description
+	string fillTemplate(const char* directory);
 };
