@@ -390,7 +390,7 @@ int main(){
 				alarm[i] = -1;
 			}
 			int turn = 1;
-			enemy opponent = enemy();
+			enemy opponent = enemy(my.name);
 			while (inCombat && my.hp > 0) {
 				switch (turn) {
 				case 1:
@@ -754,10 +754,10 @@ int main(){
 					else {// Floor
 						// Shade floor based on distance
 						float b = 1.0f - (((float)y - nScreenHeight / 2.0f) / ((float)nScreenHeight / 2.0f));
-						if (b < 0.25)		nShade = 0x2588;//'#';
-						else if (b < 0.5)	nShade = 0x2593;//'x';
-						else if (b < 0.75)	nShade = 0x2592;//'.';
-						else if (b < 0.9)	nShade = 0x2591;//'-';
+						if (b < 0.25)		nShade = 0x2588;
+						else if (b < 0.5)	nShade = 0x2593;
+						else if (b < 0.75)	nShade = 0x2592;
+						else if (b < 0.9)	nShade = 0x2591;
 						else				nShade = ' ';
 						screen[y*nScreenWidth + x] = nShade;
 					}
