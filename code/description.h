@@ -10,11 +10,12 @@ public:
 	string characteristics;
 	string qualities;
 	string name;
+	string playerName;
 	//constructor
 	description();
-	description(string name);
-	//template filler functions
-	string fillLife(); // early life
-	string fillCharacteristics(); // description
-	string fillTemplate(const char* directory);
+	description(string pn);
+	description(string n, string pn);
+	//template filler function
+	string replaceCharCode(string desc, const string code, const char* dir);
+	string fillTemplate(const char*  directory);
 };
