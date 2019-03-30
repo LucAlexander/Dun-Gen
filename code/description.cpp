@@ -1,296 +1,103 @@
 #include <iostream>
 #include <string>
 #include <stdlib.h>
-#include <fstream>
-#include <istream>
+#include <time.h>
 #include "description.h"
 #include "general.h"
 using namespace std;
 //constructor
 description::description() {
-	earlyLife = "";
-	characteristics = "";
-	name = "";
+	name = "Gigabit";
+	playerName = "James";
+	earlyLife = fillTemplate("./earlyLife.txt");
+	characteristics = fillTemplate("./characteristics.txt");
 }
-description::description(string n) {
-	earlyLife = fillLife();
-	characteristics = fillCharacteristics();
+description::description(string pn) {
+	name = "GigaBit";
+	playerName = pn;
+	earlyLife = fillTemplate("./earlyLife.txt");
+	characteristics = fillTemplate("./characteristics.txt");
+}
+description::description(string n, string pn) {
 	name = n;
+	playerName = pn;
+	earlyLife = fillTemplate("./earlyLife.txt");
+	characteristics = fillTemplate("./characteristics.txt");
 }
-string description::fillTemplate(const char* dir){
-	// read in template
-	ifstream infile;
+//functions
+string description::replaceCharCode(string desc, const string code, const char* dir) {
+	string temp;
+	general obj;
+	for (int i = 0; i < 5; i++) {
+		while (desc.find(code) != string::npos)
+		{
+			const char* curdir = dir;
+			temp = obj.pullRandom(curdir);
+			desc.insert(desc.find(code) + 2, temp);
+			desc.erase(desc.find(code), 2);
+		}
+	}
+	return desc;
+}
+string description::fillTemplate(const char* direct) {
 	string desc;
 	string temp;
 	general obj;
-	infile.open(dir);
-	if (infile.is_open())
-	{
-		int c = 2; //PLACEHOLDER_AMT_OF_TEMPLATES; should be one less than the ammount of templates
-		int val = rand() % c + 1;
-		for (int i = 0; i < val; i++)
-		{
-			infile.ignore(256, '\n');
-		}
-		getline(infile, desc);
-	}
-	else
-	{
-		cout << "Error opening file";
-	}
-	infile.close();
-	const char* dirs[] = {"./verb.txt", "./nouns", "./participleAdjectives.txt", "./descriptionAdjectives.txt", "./personalityAdjectives.txt"};
-	string reps[] = {"%V", "%O", "%P", "%D", "%E"};
+	// read in template
+	desc = obj.pullRandom(direct);
+	//special replacement cases
 	while (desc.find("$M") != string::npos) // existing name
 	{
 		desc.insert(desc.find("$M") + 2, name);
 		desc.erase(desc.find("$M"), 2);
+	}
+	while (desc.find("$N") != string::npos) // existing player name
+	{
+		desc.insert(desc.find("$N") + 2, playerName);
+		desc.erase(desc.find("$N"), 2);
 	}
 	while (desc.find("%M") != string::npos) // filling random name(a new one)
 	{
 		temp = obj.randomSyllableName();
 		desc.insert(desc.find("%M") + 2, temp);
 		desc.erase(desc.find("%M"), 2);
-		
 	}
 	while (desc.find("%A") != string::npos) // all adjectives
 	{
+		const char* dirs[] = { "./verb.txt", "./nouns", "./participleAdjectives.txt", "./descriptionAdjectives.txt", "./personalityAdjectives.txt" };
 		int choice = rand() % 3 + 1;
 		const char* dir = dirs[2];
 		const char* dir1 = dirs[3];
 		const char* dir2 = dirs[4];
 		switch (choice) {
-		case 1:
-			temp = obj.pullRandom(dir);
-			desc.insert(desc.find("%A") + 2, temp);
-			desc.erase(desc.find("%A"), 2);
+			case 1:
+				temp = obj.pullRandom(dir);
+				desc.insert(desc.find("%A") + 2, temp);
+				desc.erase(desc.find("%A"), 2);
 			break;
-		case 2:
-			temp = obj.pullRandom(dir1);
-			desc.insert(desc.find("%A") + 2, temp);
-			desc.erase(desc.find("%A"), 2);
+			case 2:
+				temp = obj.pullRandom(dir1);
+				desc.insert(desc.find("%A") + 2, temp);
+				desc.erase(desc.find("%A"), 2);
 			break;
-		case 3:
-			temp = obj.pullRandom(dir2);
-			desc.insert(desc.find("%A") + 2, temp);
-			desc.erase(desc.find("%A"), 2);
+			case 3:
+				temp = obj.pullRandom(dir2);
+				desc.insert(desc.find("%A") + 2, temp);
+				desc.erase(desc.find("%A"), 2);
 			break;
-		default:
-			temp = obj.pullRandom(dir2);
-			desc.insert(desc.find("%A") + 2, temp);
-			desc.erase(desc.find("%A"), 2);
-			break;
-		}
-	}
-	for (int i = 0;i<5;i++){
-		while (desc.find(reps[i]) != string::npos) // verbs
-		{
-			const char* curdir = dirs[i];
-			temp = obj.pullRandom(curdir);
-			desc.insert(desc.find(reps[i]) + 2, temp);
-			desc.erase(desc.find(reps[i]), 2);
-		}
-	}
-	return desc;
-}
-//functions
-string description::fillLife() {
-	// read in template
-	ifstream infile;
-	string desc;
-	string temp;
-	general obj;
-	infile.open("./earlyLife.txt");
-	if (infile.is_open())
-	{
-		int c = 2; //PLACEHOLDER_AMT_OF_TEMPLATES; should be one less than the ammount of templates
-		int val = rand() % c + 1;
-		for (int i = 0; i < val; i++)
-		{
-			infile.ignore(256, '\n');
-		}
-		getline(infile, desc);
-	}
-	else
-	{
-		cout << "Error opening file";
-	}
-	infile.close();
-	while (desc.find("$M") != string::npos) // existing name
-	{
-		desc.insert(desc.find("$M") + 2, name);
-		desc.erase(desc.find("$M"), 2);
-	}
-	while (desc.find("%M") != string::npos) // filling random name(a new one)
-	{
-		temp = obj.randomSyllableName();
-		desc.insert(desc.find("%M") + 2, temp);
-		desc.erase(desc.find("%M"), 2);
-		
-	}
-	while (desc.find("%V") != string::npos) // verbs
-	{
-		const char* dir = "./verb.txt";
-		temp = obj.pullRandom(dir);
-		desc.insert(desc.find("%V") + 2, temp);
-		desc.erase(desc.find("%V"), 2);
-	}
-	while (desc.find("%A") != string::npos) // all adjectives
-	{
-		int choice = rand() % 3 + 1;
-		const char* dir = "./participleAdjectives.txt";
-		const char* dir1 = "./descriptionAdjectives.txt";
-		const char* dir2 = "./personalityAdjectives.txt";
-		switch (choice) {
-		case 1:
-			temp = obj.pullRandom(dir);
-			desc.insert(desc.find("%A") + 2, temp);
-			desc.erase(desc.find("%A"), 2);
-			break;
-		case 2:
-			temp = obj.pullRandom(dir1);
-			desc.insert(desc.find("%A") + 2, temp);
-			desc.erase(desc.find("%A"), 2);
-			break;
-		case 3:
-			temp = obj.pullRandom(dir2);
-			desc.insert(desc.find("%A") + 2, temp);
-			desc.erase(desc.find("%A"), 2);
-			break;
-		default:
-			temp = obj.pullRandom(dir2);
-			desc.insert(desc.find("%A") + 2, temp);
-			desc.erase(desc.find("%A"), 2);
+			default:
+				temp = obj.pullRandom(dir2);
+				desc.insert(desc.find("%A") + 2, temp);
+				desc.erase(desc.find("%A"), 2);
 			break;
 		}
 	}
-	while (desc.find("%P") != string::npos) // participle adj
-	{
-		const char* dir = "./participleAdjectives.txt";
-		temp = obj.pullRandom(dir);
-		desc.insert(desc.find("%P") + 2,  temp);
-		desc.erase(desc.find("%P"), 2);
-	}
-	while (desc.find("%D") != string::npos) // description adj
-	{
-		const char* dir = "./descriptionAdjectives.txt";
-		temp = obj.pullRandom(dir);
-		desc.insert(desc.find("%D") + 2, temp);
-		desc.erase(desc.find("%D"), 2);
-	}
-	while (desc.find("%E") != string::npos) // personality adj
-	{
-		const char* dir = "./personalityAdjectives.txt";
-		temp = obj.pullRandom(dir);
-		desc.insert(desc.find("%E") + 2, temp);
-		desc.erase(desc.find("%E"), 2);
-	}
-	while (desc.find("%O") != string::npos) // nouns
-	{
-		const char* dir = "./nouns.txt";
-		temp = obj.pullRandom(dir);
-		desc.insert(desc.find("%O") + 2, temp);
-		desc.erase(desc.find("%O"), 2);
-	}
-	return desc;
-}
-string description::fillCharacteristics() {
-	// read in template
-	ifstream infile;
-	string desc;
-	string temp;
-	general obj;
-	infile.open("./characteristics.txt");
-	if (infile.is_open())
-	{
-		int c = 0; //PLACEHOLDER_AMT_OF_TEMPLATES; should be one less than the ammount of templates
-		int val = rand() % c;
-		for (int i = 0; i < val; i++)
-		{
-			infile.ignore(256, '\n');
-		}
-		getline(infile, desc);
-	}
-	else
-	{
-		cout << "Error opening file";
-	}
-	infile.close();
-	while (desc.find("$M") != string::npos) // existing name
-	{
-		desc.insert(desc.find("$M") + 2, name);
-		desc.erase(desc.find("$M"), 2);
-	}
-	while (desc.find("%M") != string::npos) // filling random name(a new one)
-	{
-		temp = obj.randomSyllableName();
-		desc.insert(desc.find("%M") + 2, temp);
-		desc.erase(desc.find("%M"), 2);
-		
-	}
-	while (desc.find("%V") != string::npos) // verbs
-	{
-		const char* dir = "./verb.txt";
-		temp = obj.pullRandom(dir);
-		desc.insert(desc.find("%V") + 2, temp);
-		desc.erase(desc.find("%V"), 2);
-	}
-	while (desc.find("%A") != string::npos) // all adjectives
-	{
-		int choice = rand() % 3 + 1;
-		const char* dir = "./participleAdjectives.txt";
-		const char* dir1 = "./descriptionAdjectives.txt";
-		const char* dir2 = "./personalityAdjectives.txt";
-		switch (choice) {
-		case 1:
-			temp = obj.pullRandom(dir);
-			desc.insert(desc.find("%A") + 2, temp);
-			desc.erase(desc.find("%A"), 2);
-			break;
-		case 2:
-			temp = obj.pullRandom(dir1);
-			desc.insert(desc.find("%A") + 2, temp);
-			desc.erase(desc.find("%A"), 2);
-			break;
-		case 3:
-			temp = obj.pullRandom(dir2);
-			desc.insert(desc.find("%A") + 2, temp);
-			desc.erase(desc.find("%A"), 2);
-			break;
-		default:
-			temp = obj.pullRandom(dir2);
-			desc.insert(desc.find("%A") + 2, temp);
-			desc.erase(desc.find("%A"), 2);
-			break;
-		}
-	}
-	while (desc.find("%P") != string::npos) // participle adj
-	{
-		const char* dir = "./participleAdjectives.txt";
-		temp = obj.pullRandom(dir);
-		desc.insert(desc.find("%P") + 2,  temp);
-		desc.erase(desc.find("%P"), 2);
-	}
-	while (desc.find("%D") != string::npos) // description adj
-	{
-		const char* dir = "./descriptionAdjectives.txt";
-		temp = obj.pullRandom(dir);
-		desc.insert(desc.find("%D") + 2, temp);
-		desc.erase(desc.find("%D"), 2);
-	}
-	while (desc.find("%E") != string::npos) // personality adj
-	{
-		const char* dir = "./personalityAdjectives.txt";
-		temp = obj.pullRandom(dir);
-		desc.insert(desc.find("%E") + 2, temp);
-		desc.erase(desc.find("%E"), 2);
-	}
-	while (desc.find("%O") != string::npos) // nouns
-	{
-		const char* dir = "./nouns.txt";
-		temp = obj.pullRandom(dir);
-		desc.insert(desc.find("%O") + 2, temp);
-		desc.erase(desc.find("%O"), 2);
-	}
+	// standard replacement cases
+	desc = replaceCharCode(desc, "%O", "./nouns.txt");
+	desc = replaceCharCode(desc, "%V", "./verbs.txt");
+	desc = replaceCharCode(desc, "%P", "./participleAdjectives.txt");
+	desc = replaceCharCode(desc, "%D", "./descriptionAdjectives.txt");
+	desc = replaceCharCode(desc, "%E", "./personalityAdjectives.txt");
+	desc = replaceCharCode(desc, "%N", "./playerNames.txt");
 	return desc;
 }
