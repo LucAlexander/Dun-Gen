@@ -125,7 +125,18 @@ enemy::enemy() {
 	max_hp = ((rand() % 16) + 5);
 	hp = max_hp;
 	name = obj.randomSyllableName();
-	//background = description(name);
+	background = description();
+	block = false;
+	canStrike = true;
+}
+enemy::enemy(string pn) {
+	general obj;
+	potions = rand() % 4;
+	att = enemyAttack();
+	max_hp = ((rand() % 16) + 5);
+	hp = max_hp;
+	name = obj.randomSyllableName();
+	background = description(name, pn);
 	block = false;
 	canStrike = true;
 }
