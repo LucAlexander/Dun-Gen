@@ -33,11 +33,12 @@ public:
 class enemy : public creature {
 public:
 	//attributes
-	//description background;
+	description background;
 	enemyAttack att;
 	int potions;
 	//functions
 	enemy();
+	enemy(string pn);
 	void printStats(int line, wchar_t *surface);
 	void enemyHeal(int hp, wchar_t *surface);
 	void enemyStrike(creature *pl, enemyAttack& att);
