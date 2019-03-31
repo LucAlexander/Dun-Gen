@@ -39,6 +39,27 @@ string description::replaceCharCode(string desc, const string code, const char* 
 	}
 	return desc;
 }
+string description::addLineBreaks(string desc, int delim) {
+	      // method to add a "~N" string segment into the given string every [delim] characters.
+		 // if a ~N already exists in the template naturally, make sure to count [delim] from that point when it is encountered
+		/*Example:
+			if this is the natural template: 
+				hello my name is jared and welcome to sea world, dont pet the jellyfish
+			and I want to add a new line every 15 chars(delim is 15), then it hsould look like this:
+				hello my name ~Nis jared and ~Nwelcome to sea ~Nworld, dont pet ~Nthe jellyfish
+				--------------15-------------15---------------15-----------------15-----------|
+
+			although if there is a ~N in the given string like so:
+				hello my name is jared ~N and welcome to sea world, dont pet the jellyfish
+			you will count 15 from that given ~N once it is encountered
+				hello my name ~Nis jared ~N and welcome to~N sea world, dont pet the jellyfish
+				-------------- 15------restart-------------15------ continue as normal
+		*/
+	   // make sure that the ~N can not go in the middle of the word, 
+	  // and if that case occurs, move it to the most recent space(on the left)
+	 // the intended purpose for this function is to make the text of a descriptory string wrap on the limiteed size of the screen we are using.
+	return desc;
+}
 string description::fillTemplate(const char* direct) {
 	string desc;
 	string temp;
@@ -92,12 +113,15 @@ string description::fillTemplate(const char* direct) {
 			break;
 		}
 	}
-	// standard replacement cases
+	// standard character replacement cases
 	desc = replaceCharCode(desc, "%O", "./nouns.txt");
 	desc = replaceCharCode(desc, "%V", "./verbs.txt");
 	desc = replaceCharCode(desc, "%P", "./participleAdjectives.txt");
 	desc = replaceCharCode(desc, "%D", "./descriptionAdjectives.txt");
 	desc = replaceCharCode(desc, "%E", "./personalityAdjectives.txt");
 	desc = replaceCharCode(desc, "%N", "./playerNames.txt");
+	//remove # char in begining of template
+	desc.erase(desc.find("#"), 1);
+	desc = addLineBreaks(desc, 100);
 	return desc;
 }
