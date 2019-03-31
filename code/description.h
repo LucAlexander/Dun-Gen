@@ -18,4 +18,5 @@ public:
 	//template filler function
 	string replaceCharCode(string desc, const string code, const char* dir);
 	string fillTemplate(const char*  directory);
+	string addLineBreaks(string desc, int delim);
 };
