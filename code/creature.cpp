@@ -158,6 +158,12 @@ void enemy::printStats(int line, wchar_t *screen) {
 	engine.conPrint(line + 1, L"This weapon has a reliability of " + wr + L"/10 reliability.", screen);
 	engine.conPrint(line + 2, n + L" Has a health of " + h, screen);
 }
+void enemy::printDesc(string desc, int line, wchar_t *surface) {
+	   // starting at [line], use conPrint to print out the given string (as a wstring(convert using StringToWString in conEngine header))
+	  // start writing on a new line whenever you encounter a ~N
+	 // refer to printStats function above for an example of how to convert things to a wstring using StringToWString(string) and stringstreams
+	// also refer to printStats function for an example of conPrint(int line, wstring content, wchar_t surface) function
+}
 void enemy::enemyDie(creature& pl) {
 	pl.kills++;
 }
