@@ -396,11 +396,13 @@ int main(){
 				case 1:
 					if (progress == 0) {
 						my.printStats(1, screen);
-						opponent.printStats(6, screen);
-						engine.conPrint(11, L"What Action would you like to take", screen);
-						engine.conPrint(12, L"1) attack with " + engine.StringToWString(my.weapon.name), screen);
+						engine.conPrint(6, engine.StringToWString(opponent.background.earlyLife), screen);
+						engine.conPrint(7, engine.StringToWString(opponent.background.characteristics), screen);
+						opponent.printStats(9, screen);
+						engine.conPrint(14, L"What Action would you like to take", screen);
+						engine.conPrint(15, L"1) attack with " + engine.StringToWString(my.weapon.name), screen);
 						if (my.inventoryCount[2] != 0) {
-							engine.conPrint(13, L"2) Drink Potion", screen);
+							engine.conPrint(16, L"2) Drink Potion", screen);
 						}
 						if (GetAsyncKeyState((unsigned short)'1') & 0x8000) {
 							engine.conClear(screen);
