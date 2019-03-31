@@ -44,4 +44,5 @@ public:
 	void enemyStrike(creature *pl, enemyAttack& att);
 	void enemyDie(creature& pl);
 	bool willDrop(enemyAttack& att);
+	void printDesc(string desc, int line, wchar_t *surface);
 };
