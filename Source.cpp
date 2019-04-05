@@ -288,9 +288,55 @@ void lapseLevel(wstring map) {
 		fPlayerY = 2.0f;
 	}
 }
+void enemyRandomMove(wstring map, float fElapsedTime, int pos){
+	
+}
 void enemyUpdate(wstring map, float fElapsedTime) {
 	// supposedly move enemies in a random direction unless the player is within a certain distance from them
 	// in which case they opt to instead chase the player
+	for (int i = 0;i<nMapWidth*nMapHeight;i++){
+		if (map.c_str()[i] == 'X'){ // if i have located an enemy
+			if (((fPlayerX - (i % nMApWidth)) < fDepth) && ((fPlayerY - (i / nMapWidth) < fDepth)){ // distance to player is less than render distance
+				bool hitWall = false;
+				bool hitPlayer = false;
+				int nEnemyX = i % nMapWidth; // enemy x pos in room
+				int nEnemyY = i / nMapHeight; // enemy y pos in room
+				while(!hitWall && !hitPlayer){
+					int lengthdir_x = int(fPlayerX) - (i%nMapWidth);
+					int lengthdir_y = int(fPlayerY) - (i / nMapHeight);
+					nEnemyX += lengthdir_x/lengthdir_y;
+					nEnemyY += (lengthdir_x/lengthdir_y) * nMapWidth;
+					if (map.c_str()[nEnemyX * nEnemyY] == '#'){ // ray hits wall
+						hitWall = true;
+					}
+					else if (map.c_str()[nEnemyX * nEnemyY] == 'P'){ // ray hits player
+						hitPlayer = true;
+					}
+				}
+				if (hitPlayer){ // i can see the player
+					
+				}
+				else{ // if not within line of sight of player
+						enemyRandomMove(map, fElapsedTime, i);
+				}
+			}
+			else{ // if not in range of player
+				enemyRandomMove(map, fElapsedTime, i);
+			}
+		}
+	}
+	/*
+	Line of sight:
+		lengthdir_x
+			fPlayerX - (i%nMapWidth)
+		lengthdir_y
+			fPlayerY - (i / nMapHeight)
+	range:
+		enemy x:
+			i % nMapWidth
+		enemy y:
+			i / nMapHeight
+	*/
 }
 void conEngine::conPrint(int line, wstring word, wchar_t *screen) {
 	for (int i = 0; i < nScreenWidth; i++) {
