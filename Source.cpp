@@ -293,10 +293,14 @@ void enemyRandomMove(wstring map, float fElapsedTime, int pos){
 	int plane = rand() % 1;
 	int dir = rand() % 1;
 	if (plane){
-		
+		if (map.c_str()[pos + dir] != '#'){
+			map.c_str()[pos + dir] = 'X';
+		}
 	}
 	else if (!plane){
-		
+		if (map.c_str()[pos+dir*nMapWidth] != '#'){
+			map.cstr()[pos+dir*nMapWidth] = 'X';
+		}
 	}
 }
 void enemyUpdate(wstring map, float fElapsedTime) {
