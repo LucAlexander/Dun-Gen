@@ -289,7 +289,15 @@ void lapseLevel(wstring map) {
 	}
 }
 void enemyRandomMove(wstring map, float fElapsedTime, int pos){
-	
+	srand(time(NULL));
+	int plane = rand() % 1;
+	int dir = rand() % 1;
+	if (plane){
+		
+	}
+	else if (!plane){
+		
+	}
 }
 void enemyUpdate(wstring map, float fElapsedTime) {
 	// supposedly move enemies in a random direction unless the player is within a certain distance from them
