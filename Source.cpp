@@ -305,7 +305,7 @@ void enemyUpdate(wstring map, float fElapsedTime) {
 					int lengthdir_x = int(fPlayerX) - (i%nMapWidth);
 					int lengthdir_y = int(fPlayerY) - (i / nMapHeight);
 					nEnemyX += lengthdir_x/lengthdir_y;
-					nEnemyY += (lengthdir_x/lengthdir_y) * nMapWidth;
+					nEnemyY += (lengthdir_y/lengthdir_x) * nMapWidth;
 					if (map.c_str()[nEnemyX * nEnemyY] == '#'){ // ray hits wall
 						hitWall = true;
 					}
@@ -313,11 +313,16 @@ void enemyUpdate(wstring map, float fElapsedTime) {
 						hitPlayer = true;
 					}
 				}
+				int lengthdir_x = int(fPlayerX) - (i%nMapWidth);
+				int lengthdir_y = int(fPlayerY) - (i / nMapHeight);
 				if (hitPlayer){ // i can see the player
-					
+					map.c_str()[i] = '.'; // replace tile im about to leave
+					if (map.c_str()[i+(lengthdir_x/lengthdir_y)+((lengthdir_y/lengthdir_x)*nMapWidth)] == '.'){ // if tileom moving to is free
+						map.c_str()[i+(lengthdir_x/lengthdir_y)+((lengthdir_y/lengthdir_x)*nMapWidth)] == 'X'; // move to place
+					}
 				}
 				else{ // if not within line of sight of player
-						enemyRandomMove(map, fElapsedTime, i);
+					enemyRandomMove(map, fElapsedTime, i);
 				}
 			}
 			else{ // if not in range of player
