@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <chrono>
 #include <cstdlib>
+#include <cmath>
 #include <stdlib.h>
 #include <sstream>
 #include <time.h>
@@ -289,7 +290,53 @@ void lapseLevel(wstring map) {
 	}
 }
 void enemyUpdate(wstring map, float fElapsedTime) {
-	
+	for (int x = 0;x<nMapWidth;x++){ // loop through x
+		for(int y = 0;i<nMapHeight;y++){ // loop through y
+			if (map.c_str()[x*y] == 'X'){ // if this coordinate is an enemy
+				if (abs(fPlayerX-x) <= fDepth && (abs(fPlayerY-y) <= fDepth)){ // if it sees the player
+					// get the signed direction of x and y distance components to the player
+					int targetDirX = fPlayerX-x;
+					int targetDirY = fPlayerY-y;
+					// checking if places are available to move to.
+					// also additional path finding conditions
+					if (map.c_str()[(signbit(targetDirX)+x) * (y+signbit(targetDirY))] != '#'){ // distancex and distancey
+						map[x*y] = '.';
+						map[(x+signbit(targetDirX))*(y+targetDirY)] = 'X';
+					}
+					else if (map.c_str()[(signbit(targetDirX)+x) * (y)] != '#'){ // distancex only
+						map[x*y] = '.';
+						map[(signbit(targetDirX)+x) * (y)] == 'X';
+					}
+					else if (map.c_str()[(signbit(targetDirY)+y) * (x)){ // distancey only
+						map[x*y] = '.';
+						map[(signbit(targetDirY)+y) * (x)] = 'X';
+					}
+				}
+				else{ // if I can not see the player
+					int dir = rand() % 1; // choose x or y plane of movement
+					// choose direction sign
+					int moveSign = rand() % 1;
+					if (moveSign == 0){
+						moveSign -= 1;
+					}
+					switch(dir){
+						case 1: // if x
+							if (map.c_str()[(x+moveSign)*y] != '#'){ // if place free
+								map[x*y] = '.'; // replace current position
+								map[(x+moveSign)*y] = 'X'; // move to new position
+							}
+						break;
+						case 0: // if y
+							if (map.c_str()[(y+moveSign)*x] != '#'){ // if place free
+								map[x*y] = '.'; // replace current position
+								map[(y+moveSign)*x] = 'X'; // move to new position
+							}
+						break;
+					}
+				}
+			}
+		}
+	}
 }
 void conEngine::conPrint(int line, wstring word, wchar_t *screen) {
 	for (int i = 0; i < nScreenWidth; i++) {
