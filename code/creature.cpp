@@ -160,22 +160,30 @@ void enemy::printStats(int line, wchar_t *screen) {
 }
 void enemy::printDesc(string description, int line, wchar_t *surface) {
 	conEngine source;
+	general database;
 	string desc = description;
 	int adder = 0;
 	int lastpos = 0;
-	char temp[120];
-	string tot;
 	while(desc.find("~N") != string::npos){
-		tot = desc.copy(temp, desc.find("~N"), lastpos);
-		source.conPrint(line+adder, source.StringToWString(tot), surface);
+		char temp[500];
+		desc.copy(temp, desc.find("~N")-lastpos, lastpos);
+		source.conPrint(line+adder, source.StringToWString(temp), surface);
 		lastpos = desc.find("~N");
-		desc.erase(desc.find("~N"), 2);
+		if (database.countSubstring(desc, "~N") > 1){
+			desc.erase(desc.find("~N"), 3);
+		}
+		else{
+			adder++;
+			break;
+		}
 		adder++;
-		tot = "";
-		for (int i = 0;i<120;i++){
-			temp[i] = ' ';
+		for (int i = 0;i<500;i++){
+			temp[i] = NULL;
 		}
 	}
+	char tomp[500];
+	desc.copy(tomp, desc.length(), desc.find("~N")+3);
+	source.conPrint(line+adder, source.StringToWString(tomp), surface);
 }
 void enemy::enemyDie(creature& pl) {
 	pl.kills++;
