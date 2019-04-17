@@ -54,6 +54,14 @@ string general::randomSyllableName() {
 	}
 	return name;
 }
+int general::countSubstring(const string& str, const string& sub){
+	if (sub.length() == 0) return 0;
+	int count = 0;
+	for (int offset = str.find(sub); offset != string::npos; offset = str.find(sub, offset + sub.length())){
+		++count;
+	}
+	return count;
+}
 string general::pullRandom(const char* file) {
 	srand(time(NULL));
 	string name;
