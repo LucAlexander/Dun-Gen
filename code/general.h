@@ -11,4 +11,5 @@ class general {
 		string randomSyllableName();
 		string pullRandom(const char* file);
 		void parse(vector<string> * arr, const char* file);
+		int countSubstring(const string& str, const string& sub);
 };
