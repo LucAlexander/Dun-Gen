@@ -170,6 +170,7 @@ void enemy::printDesc(string description, int line, wchar_t *surface) {
 		source.conPrint(line+adder, source.StringToWString(tot), surface);
 		lastpos = desc.find("~N");
 		desc.erase(desc.find("~N"), 2);
+		adder++;
 		tot = "";
 		for (int i = 0;i<120;i++){
 			temp[i] = ' ';
