@@ -122,6 +122,7 @@ string description::fillTemplate(const char* direct) {
 	desc = replaceCharCode(desc, "%N", "./playerNames.txt");
 	//remove # char in begining of template
 	desc.erase(desc.find("#"), 1);
+	//add breaks to the descriptory string every 100 characters
 	desc = addLineBreaks(desc, 100);
 	return desc;
 }
