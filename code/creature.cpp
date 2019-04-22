@@ -28,7 +28,8 @@ player::player() {
 }
 player::player(string choice) {
 	kills = 0;
-	hp = 30;
+	max_hp = 30;
+	hp = max_hp;
 	weapon = item();
 	inventoryCount[0] = 1;
 	inventoryCount[1] = 0;
@@ -53,11 +54,25 @@ string player::chooseName() {
 void player::playerHeal(int hp, wchar_t *screen) {
 	conEngine engine;
 	general gen;
-	// heal player a variable ammount, make sure that is does not exceed the max health val
-	// remove a pot from third inventoryCount slot
-	// engine.conPrint to screen how much you healed on line 2
-	engine.conPrint(2,engine.StringToWString("You " + gen.pullRandom(verb.txt) + " the potion and it heals you " + heal + " hp."), screen);
-	// add continue(k) prompt at end of engine.conPrint call
+	if(inventoryCount[2] == 0){
+		engine.conPrint(2,engine.StringToWString("You ruffle through your bag only to realize you don't have any potions."), screen);	
+	}
+	else{
+		// heal player a variable ammount, make sure that is does not exceed the max health val
+		if(hp == max_hp){
+			engine.conPrint(2,engine.StringToWString("You're at the maximum hp possible."), screen);
+		}
+		else{
+			int heal = ((rand() %3) + 2);
+			while(hp + heal>max_hp){
+				heal--;
+			}
+			hp = hp + heal;
+			inventoryCount[2]--;
+			engine.conPrint(2,engine.StringToWString("You " + gen.pullRandom(verb.txt) + " the potion and it heals you " + heal + " hp."), screen);
+		}
+	}
+	engine.conPrint(3,engine.StringToWString("Press (k) to continue."), screen);
 }
 void player::playerStrike(item& weapon, creature *target, wchar_t *screen) {
 	conEngine engine;
