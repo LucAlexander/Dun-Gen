@@ -51,9 +51,12 @@ string player::chooseName() {
 	return str;
 }
 void player::playerHeal(int hp, wchar_t *screen) {
+	conEngine engine;
+	general gen;
 	// heal player a variable ammount, make sure that is does not exceed the max health val
 	// remove a pot from third inventoryCount slot
 	// engine.conPrint to screen how much you healed on line 2
+	engine.conPrint(2,engine.StringToWString("You " + gen.pullRandom(verb.txt) + " the potion and it heals you " + heal + " hp."), screen);
 	// add continue(k) prompt at end of engine.conPrint call
 }
 void player::playerStrike(item& weapon, creature *target, wchar_t *screen) {
