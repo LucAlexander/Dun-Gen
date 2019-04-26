@@ -790,20 +790,32 @@ int main(){
 						nShade = 'X'; // Black it out
 					}
 				}
-				for (int y = 0; y < nScreenHeight; y++) {
+				for (int y = 0; y < nScreenHeight; y++) { // Draw individual pixel chars
 					// Each Row
-					if (y <= nCeiling)
+					if (y <= nCeiling){
 						screen[y*nScreenWidth + x] = ' ';
-					else if (y > nCeiling && y <= nFloor)
+					}
+					else if (y > nCeiling && y <= nFloor){
 						screen[y*nScreenWidth + x] = nShade;
+					}
 					else {// Floor
 						// Shade floor based on distance
 						float b = 1.0f - (((float)y - nScreenHeight / 2.0f) / ((float)nScreenHeight / 2.0f));
-						if (b < 0.25)		nShade = 0x2588;
-						else if (b < 0.5)	nShade = 0x2593;
-						else if (b < 0.75)	nShade = 0x2592;
-						else if (b < 0.9)	nShade = 0x2591;
-						else				nShade = ' ';
+						if (b < 0.25){
+							nShade = 0x2588;
+						}
+						else if (b < 0.5){
+							nShade = 0x2593;
+						}
+						else if (b < 0.75){
+							nShade = 0x2592;
+						}
+						else if (b < 0.9){
+							nShade = 0x2591;
+						}
+						else{
+							nShade = ' ';
+						}
 						screen[y*nScreenWidth + x] = nShade;
 					}
 				}
