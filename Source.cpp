@@ -484,7 +484,6 @@ int main(){
 					if (progress == 2) {
 						engine.conClear(screen);
 						engine.conPrint(1, L"You drink a potion to heal your wounds.", screen);
-						engine.conPrint(2, L"Continue(k)", screen);
 						my.playerHeal(my.hp, screen);
 						if (GetAsyncKeyState((unsigned short)'K') & 0x8000) {
 							progress++;
