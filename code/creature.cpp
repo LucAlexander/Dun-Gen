@@ -207,6 +207,11 @@ void enemy::enemyDie(creature& pl) {
 	pl.kills++;
 }
 void enemy::enemyHeal(int hp, wchar_t *screen) {
+	conEngine engine;
+	general gen;
+	engine.conPrint(2, gen.StringToWString(name) + L" drinks a potion", screen);
+	int heal = ((rand() %3) + 2);
+	if ()
 	// heal creature a variable ammount, make sure that is does not exceed the max health val
 	// remove a pot from third pots val
 	// engine.conPrint to screen how much it healed on line 2
