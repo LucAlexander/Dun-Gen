@@ -581,8 +581,6 @@ int main(){
 					else if (progress == 2) {
 						Sleep(100);
 						opponent.enemyHeal(opponent.hp, screen);
-						engine.conPrint(1, engine.StringToWString(opponent.name) + L" drinks a healing potion", screen);
-						engine.conPrint(2, L"Continue(k)", screen);
 						if (GetAsyncKeyState((unsigned short)'K') & 0x8000) {
 							progress++;
 							engine.conClear(screen);
