@@ -685,7 +685,7 @@ int main() {
 				canCombat = true; // make it so tht i can fight again
 			}
 			if (GetAsyncKeyState((unsigned short)'Q') & 0x8000) { // this is a quit condition
-				colorMode++;
+				colorMode = rand()%256;
 				HANDLE newColor = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
 				SetConsoleActiveScreenBuffer(newColor);
 				DWORD CdwBytesWritten = 0;
