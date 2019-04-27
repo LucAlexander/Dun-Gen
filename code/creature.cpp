@@ -53,13 +53,17 @@ string player::chooseName() {
 void player::playerHeal(int hp, wchar_t *screen) {
 	conEngine engine;
 	general gen;
-	if (inventoryCount[2] == 0) {
-		engine.conPrint(2, engine.StringToWString("You ruffle through your bag only to realize you don't have any potions."), screen);
+	stringstream fascist;
+	fascist << inventoryCount[2];
+	string hitler = fascist.str();
+	engine.conPrint(5, engine.StringToWString(hitler), screen);
+	if (inventoryCount[2] <= 0) {
+		engine.conPrint(1, engine.StringToWString("You ruffle through your bag only to realize you don't have any potions."), screen);
 	}
 	else {
 		// heal player a variable ammount, make sure that is does not exceed the max health val
 		if (hp == max_hp) {
-			engine.conPrint(2, engine.StringToWString("You're at the maximum hp possible."), screen);
+			engine.conPrint(1, engine.StringToWString("You're at the maximum hp possible."), screen);
 		}
 		else {
 			int heal = ((rand() % 3) + 2);
@@ -68,10 +72,15 @@ void player::playerHeal(int hp, wchar_t *screen) {
 			}
 			hp = hp + heal;
 			inventoryCount[2]--;
-			engine.conPrint(2, engine.StringToWString("You " + gen.pullRandom("verb.txt") + " the potion and it heals you " + heal + " hp."), screen);
+			stringstream ss;
+			ss << heal;
+			string healed = ss.str();
+			const char* dir = "./verb.txt";
+			string potionAction = gen.pullRandom(dir);
+			engine.conPrint(2, engine.StringToWString("You " + potionAction + " the potion and it heals you " + healed + " hp."), screen);
 		}
 	}
-	engine.conPrint(3, engine.StringToWString("Press (k) to continue."), screen);
+	engine.conPrint(2, engine.StringToWString("Press (k) to continue."), screen);
 }
 void player::playerStrike(item& weapon, creature *target, wchar_t *screen) {
 	conEngine engine;
