@@ -24,6 +24,14 @@ int general::findLength(const char* file) {
 	infile.close();
 	return i;
 }
+int general::countSubstring(const string& str, const string& sub) {
+	if (sub.length() == 0) return 0;
+	int count = 0;
+	for (int offset = str.find(sub); offset != string::npos; offset = str.find(sub, offset + sub.length())) {
+		++count;
+	}
+	return count;
+}
 void general::parse(vector<string> *arr, const char* file) {
 	ifstream infile;
 	infile.open(file);
@@ -53,14 +61,6 @@ string general::randomSyllableName() {
 		name.append(syllables[chunkselect]);
 	}
 	return name;
-}
-int general::countSubstring(const string& str, const string& sub){
-	if (sub.length() == 0) return 0;
-	int count = 0;
-	for (int offset = str.find(sub); offset != string::npos; offset = str.find(sub, offset + sub.length())){
-		++count;
-	}
-	return count;
 }
 string general::pullRandom(const char* file) {
 	srand(time(NULL));
