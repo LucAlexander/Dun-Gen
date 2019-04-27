@@ -28,8 +28,7 @@ player::player() {
 }
 player::player(string choice) {
 	kills = 0;
-	max_hp = 30;
-	hp = max_hp;
+	hp = 30;
 	weapon = item();
 	inventoryCount[0] = 1;
 	inventoryCount[1] = 0;
@@ -54,25 +53,25 @@ string player::chooseName() {
 void player::playerHeal(int hp, wchar_t *screen) {
 	conEngine engine;
 	general gen;
-	if(inventoryCount[2] == 0){
-		engine.conPrint(2,engine.StringToWString("You ruffle through your bag only to realize you don't have any potions."), screen);	
+	if (inventoryCount[2] == 0) {
+		engine.conPrint(2, engine.StringToWString("You ruffle through your bag only to realize you don't have any potions."), screen);
 	}
-	else{
+	else {
 		// heal player a variable ammount, make sure that is does not exceed the max health val
-		if(hp == max_hp){
-			engine.conPrint(2,engine.StringToWString("You're at the maximum hp possible."), screen);
+		if (hp == max_hp) {
+			engine.conPrint(2, engine.StringToWString("You're at the maximum hp possible."), screen);
 		}
-		else{
-			int heal = ((rand() %3) + 2);
-			while(hp + heal>max_hp){
+		else {
+			int heal = ((rand() % 3) + 2);
+			while (hp + heal > max_hp) {
 				heal--;
 			}
 			hp = hp + heal;
 			inventoryCount[2]--;
-			engine.conPrint(2,engine.StringToWString("You " + gen.pullRandom(verb.txt) + " the potion and it heals you " + heal + " hp."), screen);
+			engine.conPrint(2, engine.StringToWString("You " + gen.pullRandom("verb.txt") + " the potion and it heals you " + heal + " hp."), screen);
 		}
 	}
-	engine.conPrint(3,engine.StringToWString("Press (k) to continue."), screen);
+	engine.conPrint(3, engine.StringToWString("Press (k) to continue."), screen);
 }
 void player::playerStrike(item& weapon, creature *target, wchar_t *screen) {
 	conEngine engine;
@@ -182,26 +181,26 @@ void enemy::printDesc(string description, int line, wchar_t *surface) {
 	string desc = description;
 	int adder = 0;
 	int lastpos = 0;
-	while(desc.find("~N") != string::npos){
+	while (desc.find("~N") != string::npos) {
 		char temp[500];
-		desc.copy(temp, desc.find("~N")-lastpos, lastpos);
-		source.conPrint(line+adder, source.StringToWString(temp), surface);
+		desc.copy(temp, desc.find("~N") - lastpos, lastpos);
+		source.conPrint(line + adder, source.StringToWString(temp), surface);
 		lastpos = desc.find("~N");
-		if (database.countSubstring(desc, "~N") > 1){
+		if (database.countSubstring(desc, "~N") > 1) {
 			desc.erase(desc.find("~N"), 3);
 		}
-		else{
+		else {
 			adder++;
 			break;
 		}
 		adder++;
-		for (int i = 0;i<500;i++){
+		for (int i = 0; i < 500; i++) {
 			temp[i] = NULL;
 		}
 	}
 	char tomp[500];
-	desc.copy(tomp, desc.length(), desc.find("~N")+3);
-	source.conPrint(line+adder, source.StringToWString(tomp), surface);
+	desc.copy(tomp, desc.length(), desc.find("~N") + 3);
+	source.conPrint(line + adder, source.StringToWString(tomp), surface);
 }
 void enemy::enemyDie(creature& pl) {
 	pl.kills++;
@@ -209,10 +208,10 @@ void enemy::enemyDie(creature& pl) {
 void enemy::enemyHeal(int hp, wchar_t *screen) {
 	conEngine engine;
 	general gen;
-	if (potions > 0){
-		engine.conPrint(1, gen.StringToWString(name) + L" drinks a potion", screen);
-		int heal = ((rand() %3) + 2);
-		while (hp+heal > max_hp){
+	if (potions > 0) {
+		engine.conPrint(1, engine.StringToWString(name) + L" drinks a potion", screen);
+		int heal = ((rand() % 3) + 2);
+		while (hp + heal > max_hp) {
 			heal--;
 		}
 		potions--;
@@ -220,7 +219,7 @@ void enemy::enemyHeal(int hp, wchar_t *screen) {
 		stringstream ss;
 		ss << heal;
 		string healedAmmount = ss.str();
-		engine.conPrint(2, engine.StringToWString(name) + L" has been healed " + StringToWString(healedAmmount), screen);
+		engine.conPrint(2, engine.StringToWString(name) + L" has been healed " + engine.StringToWString(healedAmmount), screen);
 	}
 	engine.conPrint(3, L"Continue(k)", screen);
 }
