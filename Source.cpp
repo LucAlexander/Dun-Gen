@@ -4,7 +4,6 @@
 #include <algorithm>
 #include <chrono>
 #include <cstdlib>
-#include <cmath>
 #include <stdlib.h>
 #include <sstream>
 #include <time.h>
@@ -18,63 +17,7 @@ int nScreenWidth = 120;			// Console Screen Size X (columns)
 int nScreenHeight = 40;			// Console Screen Size Y (rows)
 int nMapWidth = 32;				// World Dimensions
 int nMapHeight = 32;
-int colorMode = 7; 
-/*
-	When you use an include such as #include "header.h" the same directory as the file is searched.
-	When you use an include such as #include <header.h> a specific directory is searched, chosen by your compiler, which is where you will find most standard library header files.
-	1 = blue ob \n
-	2 = green ob \n
-	3 = dark purple ob \n
-	4 = maroon ob \n
-	5 = dark brown ob \n
-	6 = caramel ob \n
-	7 = white ob \n
-	8 = periwinkle ob \n
-	9 = diff blue on black \n
-	10 = lime ob \n
-	11 = light blue ob \n
-	12 = red on black
-	13 = yellow ob \n
-	14 = orange ob \n
-	16 = black on blue \n
-	18 = green on blue \n
-	19 = purple on blue \n
-	20 = red on blue \n
-	29 = yellow on blue \n
-	30 = orange on blue \n
-	31 = white on blue \n
-	32 = black on green \n
-	33 = blue on green \n
-	35 = purple on green \n
-	36 = maroon on green \n
-	37 = brown on green \n
-	38 = caramel on green \n
-	39 = gray on green \n
-	40 = periwinkle on green \n
-	42 = lime on green \n
-	43 = light blue on green \n
-	44 = red on green \n
-	45 = yellow on green \n
-	46 = orange on green \n
-	47 = white on green \n
-	48 = black on purple \n
-	56 = periwinkle on purple \n
-	64 = black on red \n
-	76 = red on maroon \n
-	80 = black on brown \n
-	96 = black on caramel \n
-	97 = blue on caramel \n
-	98 = green on caramel \n
-	99 = purple on caramel \n
-	100 = red on caramel \n
-	127 = white on gray \n
-	128 = black on periwinkle \n
-	129 = blue on periwinkle \n
-	180 = maroon on light blue \n
-	196 = maroon on red \n
-	200 = periwinkle on red \n
-	etc, hopefully you see the pattern \n
-*/
+int colorMode = 7;
 float fPlayerX = 30.0f;			// Player Start Position
 float fPlayerY = 2.0f;
 float fPlayerA = -3.14159 / 2.0;			// Player Start Rotation
@@ -89,10 +32,13 @@ bool showMap = false;
 bool showInventory = false;
 bool lapsed = false;
 bool inCombat = false;
+bool canCombat = true;
 void printReadMe() {
 	char cont;
 	cout << "<WARNING> \n -------\n";
-	cout << "This game will only run correctly if your CMD default proportions are set to [120 x 40] \n \n";
+	cout << "This game will only run correctly if your CMD default proportions are set to [120 x 40] \n\n";
+	cout << "It is also necessary tyhast under these conditions, the font and font size you choose must allow the cmd window \n";
+	cout << "to be completely on screen and un-fullscreened\n\n";
 	cout << "If you have not done so, do that now. \nOnce you have dont that, restart this program and continue. \n \n";
 	cout << "Press any key to continue. \n";
 	cin >> cont;
@@ -155,45 +101,45 @@ wstring randLevel() {
 	for (int i = 0; i < 5; i++) {
 		n = rand() % 5;
 		switch (n) {
-			case 0:
-				map += L"#############...################";
-				map += L"#.........#....................#";
-				map += L"#.........#....................#";
-				map += L"#..................#...........#";
-				map += L"#..................#...........#";
-				map += L"#.........#........#...........#";
+		case 0:
+			map += L"#############...################";
+			map += L"#.........#....................#";
+			map += L"#.........#....................#";
+			map += L"#..................#...........#";
+			map += L"#..................#...........#";
+			map += L"#.........#........#...........#";
 			break;
-			case 1:
-				map += L"###...##########################";
-				map += L"#..............#...............#";
-				map += L"#.....####...........#.........#";
-				map += L"#.....####...........#.........#";
-				map += L"#.....####.....#.....#.........#";
-				map += L"#..............#...............#";
+		case 1:
+			map += L"###...##########################";
+			map += L"#..............#...............#";
+			map += L"#.....####...........#.........#";
+			map += L"#.....####...........#.........#";
+			map += L"#.....####.....#.....#.........#";
+			map += L"#..............#...............#";
 			break;
-			case 2:
-				map += L"#########################...####";
-				map += L"#............#.....#...........#";
-				map += L"#.......#....#.................#";
-				map += L"#.......#.................#....#";
-				map += L"#.......#..........#...........#";
-				map += L"#..................#...........#";
+		case 2:
+			map += L"#########################...####";
+			map += L"#............#.....#...........#";
+			map += L"#.......#....#.................#";
+			map += L"#.......#.................#....#";
+			map += L"#.......#..........#...........#";
+			map += L"#..................#...........#";
 			break;
-			case 3:
-				map += L"#########..###########..########";
-				map += L"#...............#..............#";
-				map += L"#...###.........#..............#";
-				map += L"#...###.........#........#.....#";
-				map += L"#...............#..............#";
-				map += L"#..............................#";
+		case 3:
+			map += L"#########..###########..########";
+			map += L"#...............#..............#";
+			map += L"#...###.........#..............#";
+			map += L"#...###.........#........#.....#";
+			map += L"#...............#..............#";
+			map += L"#..............................#";
 			break;
-			case 4:
-				map += L"#############.....##############";
-				map += L"#..............................#";
-				map += L"#..............#...............#";
-				map += L"#.....####.#########.####......#";
-				map += L"#..............#...............#";
-				map += L"#..............................#";
+		case 4:
+			map += L"#############.....##############";
+			map += L"#..............................#";
+			map += L"#..............#...............#";
+			map += L"#.....####.#########.####......#";
+			map += L"#..............#...............#";
+			map += L"#..............................#";
 			break;
 		}
 	}
@@ -207,6 +153,49 @@ wstring randLevel() {
 		}
 	}
 	return map;
+}
+int instanceNearest(wstring map, wchar_t entity) {
+	int xDist = nMapWidth;
+	int yDist = nMapHeight;
+	int total = xDist * yDist;
+	int xPos = 0;
+	int yPos = 0;
+	for (int x = 0; x < nMapWidth; x++) {
+		for (int y = 0; y < nMapHeight; y++) {
+			if (map.c_str()[x + (nMapWidth*y)] == entity) {
+				if ((abs(x - (int)fPlayerX) + 1)*(abs(y - (int)fPlayerY) + 1) < total) {
+					xDist = abs(x - (int)fPlayerX);
+					yDist = abs(y - (int)fPlayerY);
+					total = xDist * yDist;
+					xPos = x;
+					yPos = y;
+				}
+			}
+		}
+	}
+	return yPos + (nMapWidth * xPos);
+}
+void touchEnemy(wstring map) {
+	if (map.c_str()[(int)fPlayerX * nMapWidth + (int)fPlayerY] == 'X') {
+		if (canCombat) {
+			map[(int)fPlayerX * nMapWidth + (int)fPlayerY] = '.';
+			inCombat = true;
+			lapsed = true;
+			canCombat = false;
+			map[instanceNearest(map, 'X')] = '.';
+		}
+	}
+}
+void touchPlayer(wstring map, int pos) {
+	if (map.c_str()[pos] == (round(fPlayerX)*nMapWidth)+round(fPlayerY)) {
+		if (canCombat) {
+			map[pos] = '.';
+			inCombat = true;
+			lapsed = true;
+			canCombat = false;
+			map[instanceNearest(map, 'X')] = '.';
+		}
+	}
 }
 void setKeyMapping(wstring map, float fElapsedTime) {
 	//Show map
@@ -264,8 +253,8 @@ void setKeyMapping(wstring map, float fElapsedTime) {
 		if (fSpeed < fMaxSpeed) {
 			fSpeed += fAccelerate;
 		}
-		fPlayerX -= sinf(fPlayerA + 3.14159/2) * fSpeed * fElapsedTime;
-		fPlayerY -= cosf(fPlayerA + 3.14159/2) * fSpeed * fElapsedTime;
+		fPlayerX -= sinf(fPlayerA + 3.14159 / 2) * fSpeed * fElapsedTime;
+		fPlayerY -= cosf(fPlayerA + 3.14159 / 2) * fSpeed * fElapsedTime;
 		if (map.c_str()[(int)fPlayerX * nMapWidth + (int)fPlayerY] == '#') {
 			fPlayerX += sinf(fPlayerA + 3.14159 / 2) * fSpeed * fElapsedTime;
 			fPlayerY += cosf(fPlayerA + 3.14159 / 2) * fSpeed * fElapsedTime;
@@ -280,70 +269,59 @@ void setKeyMapping(wstring map, float fElapsedTime) {
 		else if (fSpeed < fMinSpeed)
 			fSpeed = fMinSpeed;
 	}
+	touchEnemy(map); // combat if im touching an enemy weith my next position upadte
 }
-void lapseLevel(wstring map) {
-	if (fPlayerX <= 1.5) {
-		inCombat = true;
-		lapsed = true;
-		fPlayerX = 30.0f;
-		fPlayerY = 2.0f;
+int signOf(int num) {
+	if (num < 0) {
+		return -1;
 	}
+	return 1;
 }
-void enemyUpdate(wstring map, float fElapsedTime) {
-	for (int x = 0;x<nMapWidth;x++){ // loop through x
-		for(int y = 0;i<nMapHeight;y++){ // loop through y
-			if (map.c_str()[x*y] == 'X'){ // if this coordinate is an enemy
-				if (abs(fPlayerX-x) <= fDepth && (abs(fPlayerY-y) <= fDepth)){ // if it sees the player
-					// get the signed direction of x and y distance components to the player
-					int targetDirX = fPlayerX-x;
-					int targetDirY = fPlayerY-y;
-					// checking if places are available to move to.
-					// also additional path finding conditions
-					if (map.c_str()[(signbit(targetDirX)+x) * (y+signbit(targetDirY))] != '#'){ // distancex and distancey
-						map[x*y] = '.';
-						map[(x+signbit(targetDirX))*(y+targetDirY)] = 'X';
+wstring enemyUpdate(wstring map) {
+	for (int i = 0; i < map.length(); i++) {
+		if (map[i] == 'X') {
+			int n = rand() % 1000;
+			int h = rand() % 1000;
+			if (n == h) {
+				int dir = rand() % 1;
+				int yOffSet = 1;
+				if (n < 500) {
+					if (n < 250) {
+						dir = 1;
+						yOffSet = 1;
 					}
-					else if (map.c_str()[(signbit(targetDirX)+x) * (y)] != '#'){ // distancex only
-						map[x*y] = '.';
-						map[(signbit(targetDirX)+x) * (y)] == 'X';
-					}
-					else if (map.c_str()[(signbit(targetDirY)+y) * (x)){ // distancey only
-						map[x*y] = '.';
-						map[(signbit(targetDirY)+y) * (x)] = 'X';
+					else{
+						dir = 1;
+						yOffSet = nMapHeight;
 					}
 				}
-				else{ // if I can not see the player
-					int dir = rand() % 1; // choose x or y plane of movement
-					// choose direction sign
-					int moveSign = rand() % 1;
-					if (moveSign == 0){
-						moveSign -= 1;
+				else {
+					if (n > 750) {
+						dir = -1;
+						yOffSet = 1;
 					}
-					switch(dir){
-						case 1: // if x
-							if (map.c_str()[(x+moveSign)*y] != '#'){ // if place free
-								map[x*y] = '.'; // replace current position
-								map[(x+moveSign)*y] = 'X'; // move to new position
-							}
-						break;
-						case 0: // if y
-							if (map.c_str()[(y+moveSign)*x] != '#'){ // if place free
-								map[x*y] = '.'; // replace current position
-								map[(y+moveSign)*x] = 'X'; // move to new position
-							}
-						break;
+					else{
+						dir = -1;
+						yOffSet = nMapWidth;
 					}
+				}
+				if (map[i + dir* yOffSet] != '#' && map[i + dir*yOffSet] != 'X') {
+					map[i] = '.';
+					map[i + dir*yOffSet] = 'X';
+					touchPlayer(map, i + (dir*yOffSet));
+					break;
 				}
 			}
 		}
 	}
+	return map;
 }
 void conEngine::conPrint(int line, wstring word, wchar_t *screen) {
 	for (int i = 0; i < nScreenWidth; i++) {
-		screen[(nScreenWidth * (line-1)) + i] = ' ';
+		screen[(nScreenWidth * (line - 1)) + i] = ' ';
 	}
 	for (int i = 0; i < word.length(); i++) {
-		screen[(nScreenWidth * (line-1)) + i] = word[i];
+		screen[(nScreenWidth * (line - 1)) + i] = word[i];
 	}
 }
 void conEngine::conPrintAdd(int line, wstring word, wchar_t *screen) {
@@ -362,7 +340,7 @@ wstring conEngine::StringToWString(string s)
 	copy(s.begin(), s.end(), temp.begin());
 	return temp;
 }
-void updateAlarms(float arr[],int arrlength) {
+void updateAlarms(float arr[], int arrlength) {
 	for (int i = 0; i < arrlength; i++) {
 		if (arr[i] > -1) {
 			arr[i] --;
@@ -372,13 +350,58 @@ void updateAlarms(float arr[],int arrlength) {
 		}
 	}
 }
-int main(){
+int removeNearestEnemy(wstring map) {
+	bool found = false;
+	int itterator = 2;
+	int dir = 0;
+	int pos = (int(floor(fPlayerX))*nMapWidth + int(floor(fPlayerY))) - 1;
+	if (map[pos] == 'X') {
+		found = true;
+	}
+	else if (map[pos - nMapWidth] == 'X ') {
+		found = true;
+	}
+	else {
+		pos -= nMapWidth;
+	}
+	while (!found) {
+		for (int i = 0; i < 2; i++) {
+			for (int k = 0; k < itterator; k++) {
+				switch (dir) {
+				case 0:
+					pos++;
+					break;
+				case 1:
+					pos += nMapWidth;
+					break;
+				case 2:
+					pos--;
+					break;
+				case 3:
+					pos -= nMapWidth;
+					break;
+				}
+			}
+			if (map[pos] == 'X') {
+				found = true;
+				return pos;
+			}
+		}
+		dir++;
+		if (dir == 4) {
+			dir = 0;
+		}
+		itterator++;
+	}
+	return -1;
+}
+int main() {
 	srand(time(NULL));
 	printReadMe();
 	printPreliminary();
 	conEngine engine;
 	general gen;
-	player my = player();	
+	player my = player();
 	cout << "|\n";
 	my.printStats();
 	cout << "\n| \n| ";
@@ -390,7 +413,7 @@ int main(){
 		cin >> my.name;
 		cout << "|__________________________________________________ \n| \n";
 		my.printStats();
-	} 
+	}
 	cout << "|\n| press any key to continue.\n| ";
 	char cont;
 	cin >> cont;
@@ -402,7 +425,7 @@ int main(){
 	// Create Screen Buffer
 	wchar_t *screen = new wchar_t[nScreenWidth*nScreenHeight];
 	HANDLE hConsole = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
-	SetConsoleActiveScreenBuffer(hConsole);	
+	SetConsoleActiveScreenBuffer(hConsole);
 	DWORD dwBytesWritten = 0;
 	// Create Map of world space # = wall block, . = space
 	wstring map;
@@ -412,7 +435,7 @@ int main(){
 	while (1) {
 		if (!inCombat) {
 			srand(time(NULL));
-			map = randLevel();
+			//map = randLevel();
 			lapsed = false;
 		}
 		else if (inCombat) {
@@ -483,7 +506,6 @@ int main(){
 					}
 					if (progress == 2) {
 						engine.conClear(screen);
-						engine.conPrint(1, L"You drink a potion to heal your wounds.", screen);
 						my.playerHeal(my.hp, screen);
 						if (GetAsyncKeyState((unsigned short)'K') & 0x8000) {
 							progress++;
@@ -569,6 +591,7 @@ int main(){
 							}
 						}
 						else {
+							Sleep(100);
 							engine.conPrint(2, L"Its hit missed you", screen);
 							engine.conPrint(3, L"Continue(k)", screen);
 							if (GetAsyncKeyState((unsigned short)'K') & 0x8000) {
@@ -586,9 +609,10 @@ int main(){
 							engine.conClear(screen);
 						}
 					}
-				break;
+					break;
 				}
 				if (progress == 3) {
+					Sleep(100);
 					if (opponent.hp <= 0) {
 						if (opponent.willDrop(opponent.att)) {
 							engine.conClear(screen);
@@ -608,13 +632,16 @@ int main(){
 							}
 						}
 						else {
-							Sleep(100);
-							engine.conPrint(1, L"Your opponents weapon was too damaged for you to be able to use it in further battles." , screen);
-							progress ++ ;
+							engine.conClear(screen);
+							engine.conPrint(1, L"Your opponents weapon was too damaged for you to be able to use it in further battles.", screen);
+							engine.conPrint(2, L"Continue(k)", screen);
+							if (GetAsyncKeyState((unsigned short)'K') & 0x8000) {
+								progress++;
+							}
 						}
 					}
 					else {
-						Sleep(200);
+						Sleep(100);
 						engine.conClear(screen);
 						engine.conPrint(1, L"turn lapsed, continue(k)", screen);
 						if (GetAsyncKeyState((unsigned short)'K') & 0x8000) {
@@ -633,12 +660,14 @@ int main(){
 					}
 				}
 				if (progress == 4) {
+					Sleep(100);
 					engine.conPrint(2, L"you picked up 1 new key, and 1 new head, continue(k)", screen);
 					if (GetAsyncKeyState((unsigned short)'K') & 0x8000) {
 						my.inventoryCount[1]++;
 						opponent.enemyDie(my);
 						my.inventoryCount[3]++;
 						inCombat = false;
+						lapsed = false;
 					}
 				}
 				//engine.conClear(screen);
@@ -650,10 +679,16 @@ int main(){
 			}
 		}
 		while (!lapsed) {
-			if (GetAsyncKeyState((unsigned short)'Q') & 0x8000) {
-				return 0;
+			if (!canCombat) { // if coming out of combat
+				map[instanceNearest(map, 'X')] = '.'; // find nearest enemy and remove
+				canCombat = true; // make it so tht i can fight again
 			}
-			lapseLevel(map);
+			if (GetAsyncKeyState((unsigned short)'Q') & 0x8000) { // this is a quit condition
+				if (removeNearestEnemy(map) != -1) {
+					map[removeNearestEnemy(map)] = '.';
+				}
+				Sleep(100);
+			}
 			// We'll need time differential per frame to calculate modification
 			// to movement speeds, to ensure consistant movement, as ray-tracing
 			// is non-deterministic
@@ -664,7 +699,7 @@ int main(){
 			// Detect keys
 			setKeyMapping(map, fElapsedTime);
 			// Move Enemies
-			enemyUpdate(map, fElapsedTime);
+			map = enemyUpdate(map);
 			for (int x = 0; x < nScreenWidth; x++) {
 				// For each column, calculate the projected ray angle into world space
 				float fRayAngle = (fPlayerA - fFOV / 2.0f) + ((float)x / (float)nScreenWidth) * fFOV;
@@ -751,13 +786,13 @@ int main(){
 				// Shader walls based on distance
 				short nShade = ' ';
 				if (bHitWall) {
-					if (fDistanceToWall <= fDepth / 4.0f){
+					if (fDistanceToWall <= fDepth / 4.0f) {
 						nShade = 0x2588;	// Very close	
 					}
-					else if (fDistanceToWall < fDepth / 3.0f){
+					else if (fDistanceToWall < fDepth / 3.0f) {
 						nShade = 0x2593;
 					}
-					else if (fDistanceToWall < fDepth / 2.0f){
+					else if (fDistanceToWall < fDepth / 2.0f) {
 						nShade = 0x2592;
 					}
 					else if (fDistanceToWall < fDepth) {
@@ -792,28 +827,28 @@ int main(){
 				}
 				for (int y = 0; y < nScreenHeight; y++) { // Draw individual pixel chars
 					// Each Row
-					if (y <= nCeiling){
+					if (y <= nCeiling) {
 						screen[y*nScreenWidth + x] = ' ';
 					}
-					else if (y > nCeiling && y <= nFloor){
+					else if (y > nCeiling && y <= nFloor) {
 						screen[y*nScreenWidth + x] = nShade;
 					}
 					else {// Floor
 						// Shade floor based on distance
 						float b = 1.0f - (((float)y - nScreenHeight / 2.0f) / ((float)nScreenHeight / 2.0f));
-						if (b < 0.25){
+						if (b < 0.25) {
 							nShade = 0x2588;
 						}
-						else if (b < 0.5){
+						else if (b < 0.5) {
 							nShade = 0x2593;
 						}
-						else if (b < 0.75){
+						else if (b < 0.75) {
 							nShade = 0x2592;
 						}
-						else if (b < 0.9){
+						else if (b < 0.9) {
 							nShade = 0x2591;
 						}
-						else{
+						else {
 							nShade = ' ';
 						}
 						screen[y*nScreenWidth + x] = nShade;
@@ -838,8 +873,8 @@ int main(){
 					wstringstream wss;
 					wss << my.inventoryCount[i];
 					itemCount = wss.str();
-					engine.conPrintAdd(i+5,L"             |: " + itemCount, screen);
-					engine.conPrintAdd(i+5,L"   | " + my.inventorySlot[i], screen);
+					engine.conPrintAdd(i + 5, L"             |: " + itemCount, screen);
+					engine.conPrintAdd(i + 5, L"   | " + my.inventorySlot[i], screen);
 				}
 				wstringstream hss;
 				hss << my.hp;
