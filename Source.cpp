@@ -48,7 +48,7 @@ void printPreliminary() {
 	char settings;
 	cout << "__________________________________________________________\n";
 	cout << "| ______________________________________________________ |\n";
-	cout << "| | ______	                   _____               | |\n";
+	cout << "| | ______	                    _____               | |\n";
 	cout << "| | |  _  |                       |  __ |              | |\n";
 	cout << "| | | | | | _   _  _ ___   _____  | |  |/  ___  _ ___  | |\n";
 	cout << "| | | | | || | | || '_  | |_____| | | __  / _ || '_  | | |\n";
@@ -427,6 +427,7 @@ int main() {
 	HANDLE hConsole = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
 	SetConsoleActiveScreenBuffer(hConsole);
 	DWORD dwBytesWritten = 0;
+	HANDLE buffer = hConsole;
 	// Create Map of world space # = wall block, . = space
 	wstring map;
 	map = randLevel();
@@ -563,7 +564,7 @@ int main() {
 									}
 									pointer += L"^";
 									engine.conPrint(6, pointer, screen);
-									WriteConsoleOutputCharacter(hConsole, screen, nScreenWidth * nScreenHeight, { 0,0 }, &dwBytesWritten);
+									WriteConsoleOutputCharacter(buffer, screen, nScreenWidth * nScreenHeight, { 0,0 }, &dwBytesWritten);
 								}
 								canSlide = false;
 							}
@@ -672,7 +673,7 @@ int main() {
 				}
 				//engine.conClear(screen);
 				updateAlarms(alarm, alarmLength);
-				WriteConsoleOutputCharacter(hConsole, screen, nScreenWidth * nScreenHeight, { 0,0 }, &dwBytesWritten);
+				WriteConsoleOutputCharacter(buffer, screen, nScreenWidth * nScreenHeight, { 0,0 }, &dwBytesWritten);
 			}
 			if (my.hp <= 0) {
 				return 0;
@@ -684,9 +685,17 @@ int main() {
 				canCombat = true; // make it so tht i can fight again
 			}
 			if (GetAsyncKeyState((unsigned short)'Q') & 0x8000) { // this is a quit condition
-				if (removeNearestEnemy(map) != -1) {
-					map[removeNearestEnemy(map)] = '.';
-				}
+				colorMode++;
+				HANDLE newColor = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
+				SetConsoleActiveScreenBuffer(newColor);
+				DWORD CdwBytesWritten = 0;
+				SetConsoleTextAttribute(newColor, colorMode);
+				// Create Screen Buffer
+				wchar_t *screen = new wchar_t[nScreenWidth*nScreenHeight];
+				HANDLE newBuffer = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
+				SetConsoleActiveScreenBuffer(newBuffer);
+				DWORD dwBytesWritten = 0;
+				buffer = newBuffer;
 				Sleep(100);
 			}
 			// We'll need time differential per frame to calculate modification
@@ -898,7 +907,7 @@ int main() {
 			}
 			// Display Frame
 			screen[nScreenWidth * nScreenHeight - 1] = '\0';
-			WriteConsoleOutputCharacter(hConsole, screen, nScreenWidth * nScreenHeight, { 0,0 }, &dwBytesWritten);
+			WriteConsoleOutputCharacter(buffer, screen, nScreenWidth * nScreenHeight, { 0,0 }, &dwBytesWritten);
 		}
 	}
 	return 0;
