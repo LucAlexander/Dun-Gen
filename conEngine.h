@@ -15,4 +15,5 @@ class conEngine {
 		void conPrintAdd(int line, wstring word, wchar_t *screen);
 		void conClear(wchar_t *screen);
 		wstring StringToWString(string s);
+		wstring generateLevel(string seed);
 };
