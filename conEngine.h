@@ -22,4 +22,5 @@ class node{
 	node* right;
 	wstring chunk;
 	void nodeAdd(wstring isaacsaididontneedthis);
+	node* parent;
 };
