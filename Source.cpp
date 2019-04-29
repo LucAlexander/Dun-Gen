@@ -341,7 +341,22 @@ wstring conEngine::StringToWString(string s)
 	return temp;
 }
 wstring conEngine::generateLevel(string seed){
-	
+	string temp  = seed;
+	int start = 0;
+	int end = 1;
+	while(temp.length() > 0){
+		if (start > temp.length() || end > temp.length()){
+			stringstream ss;
+			string room = str.copy(temp, end, start);
+			int seg1 = int(room.charAt(0));
+			int seg2 = int(room.charAt(1));
+			ss << seg1 << seg2;
+			string totalRoom = ss.str();
+			//
+			start+=2;
+			end+=2;
+		}
+	}
 }
 void conEngine::nodeAdd(node* head, wstring section){
 	node* parser = head;
