@@ -340,6 +340,36 @@ wstring conEngine::StringToWString(string s)
 	copy(s.begin(), s.end(), temp.begin());
 	return temp;
 }
+wstring conEngine::generateLevel(string seed){
+	
+}
+void conEngine::nodeAdd(node* head, wstring section){
+	node* parser = head;
+	if (parse.chunk == NULL){
+		if (parser.left == NULL && parser.right == NULL){
+			if (parser.chunk == NULL){
+				parser.chunk = section; // this node is the target
+			}
+			else{
+				nodeAdd(parser.parent, section);//go up to parent node of parser
+			}
+		}
+		else{
+			node* pLeft = parser.left;
+			node* pRight = parser.right;
+			if (pLeft.chunk == NULL){
+				nodeAdd(pLeft, section);//go to left
+			}
+			else if (pRight.chunk == NULL){
+				nodeAdd(pRight, section);//go to right
+			}
+			else if (pRight.chunk != NULL && pLeft.chunk != NULL){
+				nodeAdd(parser.parent, section);//go up to parent of parser
+				parser.chunk = L"Q"; // cut off branch
+			}
+		}
+	}
+}
 void updateAlarms(float arr[], int arrlength) {
 	for (int i = 0; i < arrlength; i++) {
 		if (arr[i] > -1) {
