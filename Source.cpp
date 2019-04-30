@@ -342,6 +342,7 @@ wstring conEngine::StringToWString(string s)
 }
 wstring conEngine::generateLevel(string seed){
 	string temp  = seed;
+	wstring map;
 	int start = 0;
 	int end = 1;
 	while(temp.length() > 0){
@@ -352,11 +353,14 @@ wstring conEngine::generateLevel(string seed){
 			int seg2 = int(room.charAt(1));
 			ss << seg1 << seg2;
 			string totalRoom = ss.str();
-			//
+			for (int i = 0;i<6;i++){
+				if (totalRoom.charAt(i))
+			}
 			start+=2;
 			end+=2;
 		}
 	}
+	return wstring;
 }
 void conEngine::nodeAdd(node* head, wstring section){
 	node* parser = head;
