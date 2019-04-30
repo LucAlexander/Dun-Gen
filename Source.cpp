@@ -33,6 +33,7 @@ bool showInventory = false;
 bool lapsed = false;
 bool inCombat = false;
 bool canCombat = true;
+stirng seed;
 void printReadMe() {
 	char cont;
 	cout << "<WARNING> \n -------\n";
@@ -340,27 +341,30 @@ wstring conEngine::StringToWString(string s)
 	copy(s.begin(), s.end(), temp.begin());
 	return temp;
 }
-wstring conEngine::generateLevel(string seed){
-	string temp  = seed;
-	wstring map;
-	int start = 0;
-	int end = 1;
-	while(temp.length() > 0){
-		if (start > temp.length() || end > temp.length()){
-			stringstream ss;
-			string room = str.copy(temp, end, start);
-			int seg1 = int(room.charAt(0));
-			int seg2 = int(room.charAt(1));
-			ss << seg1 << seg2;
-			string totalRoom = ss.str();
-			for (int i = 0;i<6;i++){
-				if (totalRoom.charAt(i))
-			}
-			start+=2;
-			end+=2;
+wstring conEngine::generateLevel(node* tree){
+	string temp = seed;
+	node* store = tree;
+	wstring floor;
+	stringstream ss;
+	string room = str.copy(temp, 2, 0);
+	int seg1 = int(room.at(0));
+	int seg2 = int(room.at(1));
+	ss << seg1 << seg2;
+	string totalRoom = ss.str();
+	for (int i = 0;i<4;i++){
+		int car = totalRoom.at(i) - '0';
+		if (car % 2 == 0){
+			store = store.left;
+		}
+		else{
+			store = store.right;
+		}
+		if (store.chunk != "Q"){
+			floor = store.chunk;
 		}
 	}
-	return wstring;
+	seed = str.erase(0, 2);
+	return floor;
 }
 void conEngine::nodeAdd(node* head, wstring section){
 	node* parser = head;
