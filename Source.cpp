@@ -341,6 +341,37 @@ wstring conEngine::StringToWString(string s)
 	copy(s.begin(), s.end(), temp.begin());
 	return temp;
 }
+void fillTree(node* head){
+	int outer = 4;
+	int inner = 0;
+	node* temp = head;
+	for (int p = 0;p<15;p++){
+		for (int i = 0;i<outer;i++){
+			//go left
+			node* q = temp.left;
+			temp = temp.left;
+		}
+		for (int k = 0;k<inner;k++){
+			//go right
+			node* q = temp.right;
+			temp = temp.right;
+		}
+		temp = head;
+	}
+	for (int p = 0;p<15;p++){
+		for (int i = 0;i<outer;i++){
+			//go right
+			node* q = temp.right;
+			temp = temp.right;
+		}
+		for (int k = 0;k<inner;k++){
+			//go left
+			node* q = temp.left;
+			temp = temp.left;
+		}
+	}
+	temp.head;
+}
 wstring conEngine::generateLevel(node* tree){
 	string temp = seed;
 	node* store = tree;
