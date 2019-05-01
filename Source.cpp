@@ -394,7 +394,7 @@ wstring conEngine::generateLevel(node* tree){
 			store = store.right;
 		}
 		if (store.chunk != "Q"){
-			floor = store.chunk;
+			floor += store.chunk;
 		}
 	}
 	seed = str.erase(0, 2);
