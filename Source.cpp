@@ -92,6 +92,9 @@ void printPreliminary() {
 		fFOV = 3.14159 / fovDivisor;
 		cout << "|\n| >>> Input Color Scheme: \n| <<< ";
 		cin >> colorMode;
+		cout << "Seed? \n";
+		cin >> seed;
+		cout << "\n";
 	}
 	cout << "|___________________________________________________ \n";
 }
@@ -514,7 +517,11 @@ int main() {
 	HANDLE buffer = hConsole;
 	// Create Map of world space # = wall block, . = space
 	wstring map;
-	map = randLevel();
+	//make seed based binary tree
+	node* tree;
+	fillTree(tree);
+	map = generateLevel(tree);
+	//define time variables
 	auto tp1 = chrono::system_clock::now();
 	auto tp2 = chrono::system_clock::now();
 	while (1) {
@@ -769,18 +776,7 @@ int main() {
 				canCombat = true; // make it so tht i can fight again
 			}
 			if (GetAsyncKeyState((unsigned short)'Q') & 0x8000) { // this is a quit condition
-				colorMode = rand()%256;
-				HANDLE newColor = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
-				SetConsoleActiveScreenBuffer(newColor);
-				DWORD CdwBytesWritten = 0;
-				SetConsoleTextAttribute(newColor, colorMode);
-				// Create Screen Buffer
-				wchar_t *screen = new wchar_t[nScreenWidth*nScreenHeight];
-				HANDLE newBuffer = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
-				SetConsoleActiveScreenBuffer(newBuffer);
-				DWORD dwBytesWritten = 0;
-				buffer = newBuffer;
-				Sleep(100);
+				return 0;
 			}
 			// We'll need time differential per frame to calculate modification
 			// to movement speeds, to ensure consistant movement, as ray-tracing
@@ -992,8 +988,24 @@ int main() {
 			// Display Frame
 			screen[nScreenWidth * nScreenHeight - 1] = '\0';
 			WriteConsoleOutputCharacter(buffer, screen, nScreenWidth * nScreenHeight, { 0,0 }, &dwBytesWritten);
+			if (fPlayerY <= 31){
+				map = generateLEvel(tree);
+				fPlayerX = 30.0;
+				fPlayerY = 2.0;
+				colorMode = rand()%256;
+				HANDLE newColor = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
+				SetConsoleActiveScreenBuffer(newColor);
+				DWORD CdwBytesWritten = 0;
+				SetConsoleTextAttribute(newColor, colorMode);
+				// Create Screen Buffer
+				wchar_t *screen = new wchar_t[nScreenWidth*nScreenHeight];
+				HANDLE newBuffer = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
+				SetConsoleActiveScreenBuffer(newBuffer);
+				DWORD dwBytesWritten = 0;
+				buffer = newBuffer;
+				Sleep(100);
+			}
 		}
 	}
 	return 0;
 }
-
