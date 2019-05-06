@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <stdlib.h>
 #include <sstream>
+#include <string>
 #include <time.h>
 #include <stdio.h>
 #include <Windows.h>
@@ -33,7 +34,7 @@ bool showInventory = false;
 bool lapsed = false;
 bool inCombat = false;
 bool canCombat = true;
-stirng seed;
+string seed = "556tyh";
 void printReadMe() {
 	char cont;
 	cout << "<WARNING> \n -------\n";
@@ -98,6 +99,9 @@ void printPreliminary() {
 	}
 	cout << "|___________________________________________________ \n";
 }
+/*
+	
+*/
 wstring randLevel() {
 	wstring map;
 	map += L"################################";
@@ -158,6 +162,121 @@ wstring randLevel() {
 	}
 	return map;
 }
+void conEngine::setTree(node* tree) {
+	wstring newNoode;
+	newNoode += L"###...##########################";
+	newNoode += L"#..............................#";
+	newNoode += L"#..............................#";
+	newNoode += L"#....................X.........#";
+	newNoode += L"#..............................#";
+	tree->nodeAdd(tree, newNoode);
+	newNoode = L"";
+	newNoode += L"###########....#################";
+	newNoode += L"#..............................#";
+	newNoode += L"#..............................#";
+	newNoode += L"#.........X....................#";
+	newNoode += L"#..............................#";
+	tree->nodeAdd(tree, newNoode);
+	newNoode = L"";
+	newNoode += L"#######################...######";
+	newNoode += L"#..............................#";
+	newNoode += L"#..............................#";
+	newNoode += L"#.............X................#";
+	newNoode += L"#..............................#";
+	tree->nodeAdd(tree, newNoode);
+	newNoode = L"";
+	newNoode += L"###..#####################..####";
+	newNoode += L"#.......X......................#";
+	newNoode += L"#..............................#";
+	newNoode += L"#..............................#";
+	newNoode += L"#..............................#";
+	tree->nodeAdd(tree, newNoode);
+	newNoode = L"";
+	newNoode += L"##############....##############";
+	newNoode += L"#................X.............#";
+	newNoode += L"#..............................#";
+	newNoode += L"#..............................#";
+	newNoode += L"#..............................#";
+	tree->nodeAdd(tree, newNoode);
+	newNoode = L"";
+	newNoode += L"#..............................#";
+	newNoode += L"#..............................#";
+	newNoode += L"#..............................#";
+	newNoode += L"#................X.............#";
+	newNoode += L"#..............................#";
+	tree->nodeAdd(tree, newNoode);
+	newNoode = L"";
+	newNoode += L"#..############..############..#";
+	newNoode += L"#..............................#";
+	newNoode += L"#...................X..........#";
+	newNoode += L"#..............................#";
+	newNoode += L"#..............................#";
+	tree->nodeAdd(tree, newNoode);
+	newNoode = L"";
+	newNoode += L"#..#####..#####..######..####..#";
+	newNoode += L"#..............................#";
+	newNoode += L"#.......X......................#";
+	newNoode += L"#..............................#";
+	newNoode += L"#..............................#";
+	tree->nodeAdd(tree, newNoode);
+	newNoode = L"";
+	newNoode += L"####..##########################";
+	newNoode += L"#..............................#";
+	newNoode += L"#..............................#";
+	newNoode += L"#...................X..........#";
+	newNoode += L"#..............................#";
+	tree->nodeAdd(tree, newNoode);
+	newNoode = L"";
+	newNoode += L"######################..########";
+	newNoode += L"#..............................#";
+	newNoode += L"#.................X............#";
+	newNoode += L"#..............................#";
+	newNoode += L"#..............................#";
+	tree->nodeAdd(tree, newNoode);
+	newNoode = L"";
+	newNoode += L"############...........#########";
+	newNoode += L"#..............................#";
+	newNoode += L"#..........X...................#";
+	newNoode += L"#..............................#";
+	newNoode += L"#..............................#";
+	tree->nodeAdd(tree, newNoode);
+	newNoode = L"";
+	newNoode += L"#................###############";
+	newNoode += L"#..............................#";
+	newNoode += L"#....................X.........#";
+	newNoode += L"#..............................#";
+	newNoode += L"#..............................#";
+	tree->nodeAdd(tree, newNoode);
+	newNoode = L"";
+	newNoode += L"###############................#";
+	newNoode += L"#..............................#";
+	newNoode += L"#..............................#";
+	newNoode += L"#...................X..........#";
+	newNoode += L"#..............................#";
+	tree->nodeAdd(tree, newNoode);
+	newNoode = L"";
+	newNoode += L"#######....#####..######...#####";
+	newNoode += L"#..............................#";
+	newNoode += L"#.........X....................#";
+	newNoode += L"#..............................#";
+	newNoode += L"#..............................#";
+	tree->nodeAdd(tree, newNoode);
+	newNoode = L"";
+	newNoode += L"##......###.###...###..#########";
+	newNoode += L"#..............................#";
+	newNoode += L"#..............................#";
+	newNoode += L"#.....................X........#";
+	newNoode += L"#..............................#";
+	tree->nodeAdd(tree, newNoode);
+	newNoode = L"";
+	newNoode += L"#####...####.#####........###.##";
+	newNoode += L"#..............................#";
+	newNoode += L"#..............................#";
+	newNoode += L"#...........X..................#";
+	newNoode += L"#..............................#";
+	tree->nodeAdd(tree, newNoode);
+	newNoode = L"";
+}
 int instanceNearest(wstring map, wchar_t entity) {
 	int xDist = nMapWidth;
 	int yDist = nMapHeight;
@@ -191,7 +310,7 @@ void touchEnemy(wstring map) {
 	}
 }
 void touchPlayer(wstring map, int pos) {
-	if (map.c_str()[pos] == (round(fPlayerX)*nMapWidth)+round(fPlayerY)) {
+	if (map.c_str()[pos] == (round(fPlayerX)*nMapWidth) + round(fPlayerY)) {
 		if (canCombat) {
 			map[pos] = '.';
 			inCombat = true;
@@ -294,7 +413,7 @@ wstring enemyUpdate(wstring map) {
 						dir = 1;
 						yOffSet = 1;
 					}
-					else{
+					else {
 						dir = 1;
 						yOffSet = nMapHeight;
 					}
@@ -304,14 +423,14 @@ wstring enemyUpdate(wstring map) {
 						dir = -1;
 						yOffSet = 1;
 					}
-					else{
+					else {
 						dir = -1;
 						yOffSet = nMapWidth;
 					}
 				}
-				if (map[i + dir* yOffSet] != '#' && map[i + dir*yOffSet] != 'X') {
+				if (map[i + dir * yOffSet] != '#' && map[i + dir * yOffSet] != 'X') {
 					map[i] = '.';
-					map[i + dir*yOffSet] = 'X';
+					map[i + dir * yOffSet] = 'X';
 					touchPlayer(map, i + (dir*yOffSet));
 					break;
 				}
@@ -344,85 +463,106 @@ wstring conEngine::StringToWString(string s)
 	copy(s.begin(), s.end(), temp.begin());
 	return temp;
 }
-void fillTree(node* head){
+void conEngine::fillTree( node* head) {
 	int outer = 4;
 	int inner = 0;
 	node* temp = head;
-	for (int p = 0;p<15;p++){
-		for (int i = 0;i<outer;i++){
-			//go left
-			node* q = temp.left;
-			temp = temp.left;
+	for (int p = 0; p < 15; p++) {
+		for (int i = 0; i < outer; i++) {
+			//set and go left
+			node* q = new node();
+			temp->left = q;
+			temp->left->parent = temp;
+			temp = temp->left;
 		}
-		for (int k = 0;k<inner;k++){
-			//go right
-			node* q = temp.right;
-			temp = temp.right;
+		for (int k = 0; k < inner; k++) {
+			//set and go right
+			node* q = new node();
+			temp->right = q;
+			temp->right->parent = temp;
+			temp = temp->right;
 		}
 		temp = head;
+		outer--;
+		inner++;
 	}
-	for (int p = 0;p<15;p++){
-		for (int i = 0;i<outer;i++){
-			//go right
-			node* q = temp.right;
-			temp = temp.right;
+	outer = 4;
+	inner = 0;
+	for (int p = 0; p < 15; p++) {
+		for (int i = 0; i < outer; i++) {
+			//set and go right
+			node* q = new node();
+			temp->right = q;
+			temp->right->parent = temp;
+			temp = temp->right;
 		}
-		for (int k = 0;k<inner;k++){
-			//go left
-			node* q = temp.left;
-			temp = temp.left;
+		for (int k = 0; k < inner; k++) {
+			//set and go left
+			node* q = new node();
+			temp->left = q;
+			temp->left->parent = temp;
+			temp = temp->left;
 		}
+		temp = head;
+		outer--;
+		inner++;
 	}
-	temp.head;
 }
-wstring conEngine::generateLevel(node* tree){
+wstring conEngine::generateLevel(node* tree) {
 	string temp = seed;
 	node* store = tree;
 	wstring floor;
+	floor += L"################################";
 	stringstream ss;
-	string room = str.copy(temp, 2, 0);
+	string room = temp.substr(0, 2);
 	int seg1 = int(room.at(0));
 	int seg2 = int(room.at(1));
 	ss << seg1 << seg2;
 	string totalRoom = ss.str();
-	for (int i = 0;i<4;i++){
+	for (int i = 0; i < 4; i++) {
 		int car = totalRoom.at(i) - '0';
-		if (car % 2 == 0){
-			store = store.left;
+		if (car % 2 == 0) {
+			if (store->left != NULL) {
+				store = store->left;
+			}
 		}
-		else{
-			store = store.right;
+		else if (store->right != NULL){
+			store = store->right;
 		}
-		if (store.chunk != "Q"){
-			floor += store.chunk;
+		if (store->chunk != L"NULL" && store->chunk != L"Q") {
+			floor += store->chunk;
 		}
 	}
-	seed = str.erase(0, 2);
+	seed.erase(0, 2);
+	floor += L"################################";
 	return floor;
 }
-void conEngine::nodeAdd(node* head, wstring section){
+node::node() {
+	wstring chunk = L"NULL";
+}
+void node::nodeAdd(node* head, wstring section) {
 	node* parser = head;
-	if (parse.chunk == NULL){
-		if (parser.left == NULL && parser.right == NULL){
-			if (parser.chunk == NULL){
-				parser.chunk = section; // this node is the target
+	if (parser->chunk == L"NULL") {
+		if (parser->left == NULL && parser->right == NULL) {
+			if (parser->chunk == L"NULL") {
+				parser->chunk = section; // this node is the target
 			}
-			else{
-				nodeAdd(parser.parent, section);//go up to parent node of parser
+			else {
+				nodeAdd(parser->parent, section);//go up to parent node of parser
 			}
 		}
-		else{
-			node* pLeft = parser.left;
-			node* pRight = parser.right;
-			if (pLeft.chunk == NULL){
+		else {
+			node* pLeft = parser->left;
+			node* pRight = parser->right;
+			if (pLeft->chunk == L"NULL") {
 				nodeAdd(pLeft, section);//go to left
 			}
-			else if (pRight.chunk == NULL){
+			else if (pRight->chunk == L"NULL") {
 				nodeAdd(pRight, section);//go to right
 			}
-			else if (pRight.chunk != NULL && pLeft.chunk != NULL){
-				nodeAdd(parser.parent, section);//go up to parent of parser
-				parser.chunk = L"Q"; // cut off branch
+			else if (pRight->chunk != L"NULL" && pLeft->chunk != L"NULL") {
+				nodeAdd(parser->parent, section);//go up to parent of parser
+				parser->chunk = L"Q"; // cut off branch
 			}
 		}
 	}
@@ -504,6 +644,16 @@ int main() {
 	cout << "|\n| press any key to continue.\n| ";
 	char cont;
 	cin >> cont;
+	// Create Map of world space # = wall block, . = space
+	wstring map;
+	//make seed based binary tree
+	node* tree = new node();
+	//generate tree skeleton
+	engine.fillTree(tree);
+	//fill the bin tree with chunks
+	engine.setTree(tree);
+	// make first level
+	map = engine.generateLevel(tree);
 	// Set Colors
 	HANDLE CConsole = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
 	SetConsoleActiveScreenBuffer(CConsole);
@@ -515,12 +665,6 @@ int main() {
 	SetConsoleActiveScreenBuffer(hConsole);
 	DWORD dwBytesWritten = 0;
 	HANDLE buffer = hConsole;
-	// Create Map of world space # = wall block, . = space
-	wstring map;
-	//make seed based binary tree
-	node* tree;
-	fillTree(tree);
-	map = generateLevel(tree);
 	//define time variables
 	auto tp1 = chrono::system_clock::now();
 	auto tp2 = chrono::system_clock::now();
@@ -823,7 +967,7 @@ int main() {
 							vector<pair<float, float>> p;
 							// Test each corner of hit tile, storing the distance from
 							// the player, and the calculated dot product of the two rays
-							for (int tx = 0; tx < 2; tx++)
+							for (int tx = 0; tx < 2; tx++) {
 								for (int ty = 0; ty < 2; ty++) {
 									// Angle of corner to eye
 									float vy = (float)nTestY + ty - fPlayerY;
@@ -832,13 +976,20 @@ int main() {
 									float dot = (fEyeX * vx / d) + (fEyeY * vy / d);
 									p.push_back(make_pair(d, dot));
 								}
+							}
 							// Sort Pairs from closest to farthest
 							sort(p.begin(), p.end(), [](const pair<float, float> &left, const pair<float, float> &right) {return left.first < right.first; });
 							// First two/three are closest (we will never see all four)
 							float fBound = 0.01;
-							if (acos(p.at(0).second) < fBound) bBoundary = true;
-							if (acos(p.at(1).second) < fBound) bBoundary = true;
-							if (acos(p.at(2).second) < fBound) bBoundary = true;
+							if (acos(p.at(0).second) < fBound) {
+								bBoundary = true; 
+							}
+							if (acos(p.at(1).second) < fBound) {
+								bBoundary = true; 
+							}
+							if (acos(p.at(2).second) < fBound) {
+								bBoundary = true; 
+							}
 						}
 						else if (map.c_str()[nTestX * nMapWidth + nTestY] == 'X') {
 							// Ray has hit wall
@@ -850,7 +1001,7 @@ int main() {
 							vector<pair<float, float>> p;
 							// Test each corner of hit tile, storing the distance from
 							// the player, and the calculated dot product of the two rays
-							for (int tx = 0; tx < 2; tx++)
+							for (int tx = 0; tx < 2; tx++) {
 								for (int ty = 0; ty < 2; ty++) {
 									// Angle of corner to eye
 									float vy = (float)nTestY + ty - fPlayerY;
@@ -859,13 +1010,20 @@ int main() {
 									float dot = (fEyeX * vx / d) + (fEyeY * vy / d);
 									p.push_back(make_pair(d, dot));
 								}
+							}
 							// Sort Pairs from closest to farthest
 							sort(p.begin(), p.end(), [](const pair<float, float> &left, const pair<float, float> &right) {return left.first < right.first; });
 							// First two/three are closest (we will never see all four)
 							float fBound = 0.01;
-							if (acos(p.at(0).second) < fBound) bBoundary = true;
-							if (acos(p.at(1).second) < fBound) bBoundary = true;
-							if (acos(p.at(2).second) < fBound) bBoundary = true;
+							if (acos(p.at(0).second) < fBound) { 
+								bBoundary = true; 
+							}
+							if (acos(p.at(1).second) < fBound) {
+								bBoundary = true; 
+							}
+							if (acos(p.at(2).second) < fBound) {
+								bBoundary = true; 
+							}
 						}
 					}
 				}
@@ -988,11 +1146,11 @@ int main() {
 			// Display Frame
 			screen[nScreenWidth * nScreenHeight - 1] = '\0';
 			WriteConsoleOutputCharacter(buffer, screen, nScreenWidth * nScreenHeight, { 0,0 }, &dwBytesWritten);
-			if (fPlayerY <= 31){
-				map = generateLEvel(tree);
+			if (fPlayerX <= 1) {
+				map = engine.generateLevel(tree);
 				fPlayerX = 30.0;
 				fPlayerY = 2.0;
-				colorMode = rand()%256;
+				colorMode = rand() % 256;
 				HANDLE newColor = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
 				SetConsoleActiveScreenBuffer(newColor);
 				DWORD CdwBytesWritten = 0;
