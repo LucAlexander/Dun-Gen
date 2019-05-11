@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <stdlib.h>
 #include <sstream>
+#include <string>
 #include <time.h>
 #include <stdio.h>
 #include <Windows.h>
@@ -33,7 +34,28 @@ bool showInventory = false;
 bool lapsed = false;
 bool inCombat = false;
 bool canCombat = true;
-stirng seed;
+string seed = "NULL";
+class nde {
+public:
+	nde *left;
+	nde *right;
+	nde *parent;
+	wstring chunk;
+	nde();
+	nde(nde *pt);
+	nde(nde *pt, wstring ch);
+};
+nde::nde() {
+	chunk = L"NULL";
+}
+nde::nde(nde* pt) {
+	parent = pt;
+	chunk = L"NULL";
+}
+nde::nde(nde *pt, wstring ch) {
+	parent = pt;
+	chunk = ch;
+}
 void printReadMe() {
 	char cont;
 	cout << "<WARNING> \n -------\n";
@@ -44,6 +66,20 @@ void printReadMe() {
 	cout << "Press any key to continue. \n";
 	cin >> cont;
 	system("CLS");
+}
+string random_string(){
+	int length = 48;
+	auto randchar = []() -> char{
+		const char charset[] =
+			"0123456789"
+			"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+			"abcdefghijklmnopqrstuvwxyz";
+		const size_t max_index = (sizeof(charset) - 1);
+		return charset[rand() % max_index];
+	};
+	string str(length, 0);
+	generate_n(str.begin(), length, randchar);
+	return str;
 }
 void printPreliminary() {
 	char settings;
@@ -92,11 +128,182 @@ void printPreliminary() {
 		fFOV = 3.14159 / fovDivisor;
 		cout << "|\n| >>> Input Color Scheme: \n| <<< ";
 		cin >> colorMode;
-		cout << "Seed? \n";
-		cin >> seed;
+		cout << "Seed:(12 digit alpha numberic, or non zero alpha numeric divisible by 12) \n";
+		string seedchoice;
+		cin >> seedchoice;
+		if (seedchoice == "y") {
+			cout << "input seed: \n";
+			while (seed.length() % 12 != 0 || seed.length() == 0) {
+				cin >> seed;
+			}
+		}
+		else {
+			seed = random_string();
+		}
 		cout << "\n";
 	}
+	else {
+		seed = random_string();
+	}
 	cout << "|___________________________________________________ \n";
+}
+void makeTree(nde *head) {
+	wstring temp;
+	nde *l = new nde(head);
+	head->left = l;
+	nde *lr = new nde(l);
+	l->right = lr;
+	nde *lrl = new nde(lr);
+	lr->left = lrl;
+	temp += L"###############..###############";
+	temp += L"#....................##........#";
+	temp += L"#..#..#....############........#";
+	temp += L"#..#..#..............#######...#";
+	temp += L"#..............................#";
+	nde *lrlr = new nde(lrl, temp);
+	lrl->right = lrlr;
+	temp = L"";
+	temp += L"####..###################..#####";
+	temp += L"#.......##########.............#";
+	temp += L"#..........##..................#";
+	temp += L"#..........##..................#";
+	temp += L"#..............................#";
+	nde *lrll = new nde(lrl, temp);
+	lrl->left = lrll;
+	nde *lrr = new nde(lr);
+	lr->right = lrr;
+	temp = L"";
+	temp += L"#..............#####.....#######";
+	temp += L"#..............#...............#";
+	temp += L"#.##############...............#";
+	temp += L"#..............#...............#";
+	temp += L"#..............................#";
+	nde *lrrr = new nde(lrr, temp);
+	lrr->right = lrrr;
+	temp = L"";
+	temp += L"#.############....############.#";
+	temp += L"#..............................#";
+	temp += L"#..............................#";
+	temp += L"#..............................#";
+	temp += L"#..............................#";
+	nde *lrrl = new nde(lrr, temp);
+	lrr->left = lrrl;
+	nde *l1 = new nde(l);
+	l->left = l1;
+	nde *l1r = new nde(l1);
+	l1->right = l1r;
+	temp = L"";
+	temp += L"#..............##########..#####";
+	temp += L"############.....###...........#";
+	temp += L"############...................#";
+	temp += L"#................###...........#";
+	temp += L"#..............................#";
+	nde *l1rr = new nde(l1r, temp);
+	l1r->right = l1rr;
+	temp = L"";
+	temp += L"#..............................#";
+	temp += L"#..............................#";
+	temp += L"#..............................#";
+	temp += L"#..............................#";
+	temp += L"#..............................#";
+	nde *l1rl = new nde(l1r, temp);
+	l1r->left = l1rl;
+	nde *l2 = new nde(l1);
+	l1->left = l2;
+	temp = L"";
+	temp += L"########.##........########.####";
+	temp += L"#..............................#";
+	temp += L"#..............................#";
+	temp += L"#..............................#";
+	temp += L"#..........####.####...........#";
+	nde *l3 = new nde(l2, temp);
+	l2->left = l3;
+	temp = L"";
+	temp += L"#...............#..............#";
+	temp += L"#...............#..............#";
+	temp += L"#..............................#";
+	temp += L"#..............................#";
+	temp += L"#..............................#";
+	nde *l2r = new nde(l2, temp);
+	l2->right = l2r;
+	nde *r = new nde(head);
+	head->right = r;
+	nde *rl = new nde(r);
+	r->left = rl;
+	nde *rlr = new nde(rl);
+	rl->right = rlr;
+	temp = L"";
+	temp += L"#############..............#####";
+	temp += L"#...........#..................#";
+	temp += L"#....##.....######.....#########";
+	temp += L"#....##........................#";
+	temp += L"#..............................#";
+	nde *rlrr = new nde(rlr, temp);
+	rlr->right = rlrr;
+	temp = L"";
+	temp += L"#...............######...#######";
+	temp += L"#....................#....#...#";
+	temp += L"########.............#.........#";
+	temp += L"#....................#.........#";
+	temp += L"#..............................#";
+	nde *rlrl = new nde(rlr, temp);
+	rlr->left = rlrl;
+	nde *rll = new nde(rl);
+	rl->left = rll;
+	temp = L"";
+	temp += L"##############..################";
+	temp += L"#..........###..###............#";
+	temp += L"#..........###..###............#";
+	temp += L"###........###..###..........###";
+	temp += L"#..............................#";
+	nde *rllr = new nde(rll, temp);
+	rll->right = rllr;
+	temp = L"";
+	temp += L"########............####..######";
+	temp += L"#...#.................#........#";
+	temp += L"#...#.................#........#";
+	temp += L"#...#..........................#";
+	temp += L"#.....................#........#";
+	nde *rlll = new nde(rll, temp);
+	rll->left = rlll;
+	nde *r1 = new nde(r);
+	r->right = r1;
+	nde *r1l = new nde(r1);
+	r1->left = r1l;
+	temp = L"";
+	temp += L"###########.......##############";
+	temp += L"#..............................#";
+	temp += L"#...#..................##......#";
+	temp += L"#...#####..............##......#";
+	temp += L"#.......#......................#";
+	nde *r1ll = new nde(r1l, temp);
+	r1l->left = r1ll;
+	temp = L"";
+	temp += L"####.#.#.#.#...#.#.#############";
+	temp += L"#..............................#";
+	temp += L"#....#...........###...........#";
+	temp += L"#....#...........###...........#";
+	temp += L"#..............................#";
+	nde *r1lr = new nde(r1l, temp);
+	r1l->right = r1lr;
+	nde *r2 = new nde(r1);
+	r1->right = r2;
+	temp = L"";
+	temp += L"###...#########......###########";
+	temp += L"#..............................#";
+	temp += L"#.........####.......####......#";
+	temp += L"#..............................#";
+	temp += L"#..............................#";
+	nde *r3 = new nde(r2, temp);
+	r2->right = r3;
+	temp = L"";
+	temp += L"####.,...................#######";
+	temp += L"#..............................#";
+	temp += L"#....####............####......#";
+	temp += L"#....####............####......#";
+	temp += L"#..............................#";
+	nde *r2l = new nde(r2, temp);
+	r2->left = r2l;
 }
 wstring randLevel() {
 	wstring map;
@@ -105,45 +312,45 @@ wstring randLevel() {
 	for (int i = 0; i < 5; i++) {
 		n = rand() % 5;
 		switch (n) {
-		case 0:
-			map += L"#############...################";
-			map += L"#.........#....................#";
-			map += L"#.........#....................#";
-			map += L"#..................#...........#";
-			map += L"#..................#...........#";
-			map += L"#.........#........#...........#";
+			case 0:
+				map += L"#############...################";
+				map += L"#.........#....................#";
+				map += L"#.........#....................#";
+				map += L"#..................#...........#";
+				map += L"#..................#...........#";
+				map += L"#.........#........#...........#";
 			break;
-		case 1:
-			map += L"###...##########################";
-			map += L"#..............#...............#";
-			map += L"#.....####...........#.........#";
-			map += L"#.....####...........#.........#";
-			map += L"#.....####.....#.....#.........#";
-			map += L"#..............#...............#";
+			case 1:
+				map += L"###...##########################";
+				map += L"#..............#...............#";
+				map += L"#.....####...........#.........#";
+				map += L"#.....####...........#.........#";
+				map += L"#.....####.....#.....#.........#";
+				map += L"#..............#...............#";
 			break;
-		case 2:
-			map += L"#########################...####";
-			map += L"#............#.....#...........#";
-			map += L"#.......#....#.................#";
-			map += L"#.......#.................#....#";
-			map += L"#.......#..........#...........#";
-			map += L"#..................#...........#";
+			case 2:
+				map += L"#########################...####";
+				map += L"#............#.....#...........#";
+				map += L"#.......#....#.................#";
+				map += L"#.......#.................#....#";
+				map += L"#.......#..........#...........#";
+				map += L"#..................#...........#";
 			break;
-		case 3:
-			map += L"#########..###########..########";
-			map += L"#...............#..............#";
-			map += L"#...###.........#..............#";
-			map += L"#...###.........#........#.....#";
-			map += L"#...............#..............#";
-			map += L"#..............................#";
+			case 3:
+				map += L"#########..###########..########";
+				map += L"#...............#..............#";
+				map += L"#...###.........#..............#";
+				map += L"#...###.........#........#.....#";
+				map += L"#...............#..............#";
+				map += L"#..............................#";
 			break;
-		case 4:
-			map += L"#############.....##############";
-			map += L"#..............................#";
-			map += L"#..............#...............#";
-			map += L"#.....####.#########.####......#";
-			map += L"#..............#...............#";
-			map += L"#..............................#";
+			case 4:
+				map += L"#############.....##############";
+				map += L"#..............................#";
+				map += L"#..............#...............#";
+				map += L"#.....####.#########.####......#";
+				map += L"#..............#...............#";
+				map += L"#..............................#";
 			break;
 		}
 	}
@@ -157,6 +364,54 @@ wstring randLevel() {
 		}
 	}
 	return map;
+}
+wstring selectTree(nde *head) {
+	if (seed.length() < 12) {
+		return randLevel();
+	}
+	wstring mp;
+	mp += L"################################";
+	if (seed.length() % 12 == 0) {
+		for (int i = 0; i < 12; i += 2) {
+			string seedSeg = seed.substr(0, 2);
+			seed.erase(0, 2);
+			char first = (seedSeg.at(0)) - 48;
+			char second = (seedSeg.at(1)) - 48;
+			int firstTwo = first;
+			int secondTwo = second;
+			if (firstTwo < 10) {
+				firstTwo += 12;
+			}
+			if (secondTwo < 10) {
+				secondTwo += 12;
+			}
+			stringstream ss;
+			ss << firstTwo << secondTwo;
+			string total = ss.str();
+			nde *temp = head;
+			for (int k = 0; k < 4; k++) {
+				char digit = total.at(k);
+				if (digit % 2 == 0) {
+					temp = temp->left;
+				}
+				else if (digit % 2 == 1) {
+					temp = temp->right;
+				}
+			}
+			mp += temp->chunk;
+		}
+	}
+	mp += L"################################";
+	int n;
+	for (int i = 0; i < mp.length(); i++) {
+		n = rand() % 64;
+		if (n == 0) {
+			if (mp[i] != '#') {
+				mp[i] = 'X';
+			}
+		}
+	}
+	return mp;
 }
 int instanceNearest(wstring map, wchar_t entity) {
 	int xDist = nMapWidth;
@@ -191,7 +446,7 @@ void touchEnemy(wstring map) {
 	}
 }
 void touchPlayer(wstring map, int pos) {
-	if (map.c_str()[pos] == (round(fPlayerX)*nMapWidth)+round(fPlayerY)) {
+	if (map.c_str()[pos] == (round(fPlayerX)*nMapWidth) + round(fPlayerY)) {
 		if (canCombat) {
 			map[pos] = '.';
 			inCombat = true;
@@ -294,7 +549,7 @@ wstring enemyUpdate(wstring map) {
 						dir = 1;
 						yOffSet = 1;
 					}
-					else{
+					else {
 						dir = 1;
 						yOffSet = nMapHeight;
 					}
@@ -304,14 +559,14 @@ wstring enemyUpdate(wstring map) {
 						dir = -1;
 						yOffSet = 1;
 					}
-					else{
+					else {
 						dir = -1;
 						yOffSet = nMapWidth;
 					}
 				}
-				if (map[i + dir* yOffSet] != '#' && map[i + dir*yOffSet] != 'X') {
+				if (map[i + dir * yOffSet] != '#' && map[i + dir * yOffSet] != 'X') {
 					map[i] = '.';
-					map[i + dir*yOffSet] = 'X';
+					map[i + dir * yOffSet] = 'X';
 					touchPlayer(map, i + (dir*yOffSet));
 					break;
 				}
@@ -343,89 +598,6 @@ wstring conEngine::StringToWString(string s)
 	wstring temp(s.length(), L' ');
 	copy(s.begin(), s.end(), temp.begin());
 	return temp;
-}
-void fillTree(node* head){
-	int outer = 4;
-	int inner = 0;
-	node* temp = head;
-	for (int p = 0;p<15;p++){
-		for (int i = 0;i<outer;i++){
-			//go left
-			node* q = temp.left;
-			temp = temp.left;
-		}
-		for (int k = 0;k<inner;k++){
-			//go right
-			node* q = temp.right;
-			temp = temp.right;
-		}
-		temp = head;
-	}
-	for (int p = 0;p<15;p++){
-		for (int i = 0;i<outer;i++){
-			//go right
-			node* q = temp.right;
-			temp = temp.right;
-		}
-		for (int k = 0;k<inner;k++){
-			//go left
-			node* q = temp.left;
-			temp = temp.left;
-		}
-	}
-	temp.head;
-}
-wstring conEngine::generateLevel(node* tree){
-	string temp = seed;
-	node* store = tree;
-	wstring floor;
-	stringstream ss;
-	string room = str.copy(temp, 2, 0);
-	int seg1 = int(room.at(0));
-	int seg2 = int(room.at(1));
-	ss << seg1 << seg2;
-	string totalRoom = ss.str();
-	for (int i = 0;i<4;i++){
-		int car = totalRoom.at(i) - '0';
-		if (car % 2 == 0){
-			store = store.left;
-		}
-		else{
-			store = store.right;
-		}
-		if (store.chunk != "Q"){
-			floor += store.chunk;
-		}
-	}
-	seed = str.erase(0, 2);
-	return floor;
-}
-void conEngine::nodeAdd(node* head, wstring section){
-	node* parser = head;
-	if (parse.chunk == NULL){
-		if (parser.left == NULL && parser.right == NULL){
-			if (parser.chunk == NULL){
-				parser.chunk = section; // this node is the target
-			}
-			else{
-				nodeAdd(parser.parent, section);//go up to parent node of parser
-			}
-		}
-		else{
-			node* pLeft = parser.left;
-			node* pRight = parser.right;
-			if (pLeft.chunk == NULL){
-				nodeAdd(pLeft, section);//go to left
-			}
-			else if (pRight.chunk == NULL){
-				nodeAdd(pRight, section);//go to right
-			}
-			else if (pRight.chunk != NULL && pLeft.chunk != NULL){
-				nodeAdd(parser.parent, section);//go up to parent of parser
-				parser.chunk = L"Q"; // cut off branch
-			}
-		}
-	}
 }
 void updateAlarms(float arr[], int arrlength) {
 	for (int i = 0; i < arrlength; i++) {
@@ -504,6 +676,14 @@ int main() {
 	cout << "|\n| press any key to continue.\n| ";
 	char cont;
 	cin >> cont;
+	// Create Map of world space # = wall block, . = space
+	wstring map;
+	//make seed based binary tree
+	nde* tree = new nde();
+	//fill the bin tree with chunks
+	makeTree(tree);
+	// make first level
+	map = selectTree(tree);
 	// Set Colors
 	HANDLE CConsole = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
 	SetConsoleActiveScreenBuffer(CConsole);
@@ -515,12 +695,6 @@ int main() {
 	SetConsoleActiveScreenBuffer(hConsole);
 	DWORD dwBytesWritten = 0;
 	HANDLE buffer = hConsole;
-	// Create Map of world space # = wall block, . = space
-	wstring map;
-	//make seed based binary tree
-	node* tree;
-	fillTree(tree);
-	map = generateLevel(tree);
 	//define time variables
 	auto tp1 = chrono::system_clock::now();
 	auto tp2 = chrono::system_clock::now();
@@ -823,7 +997,7 @@ int main() {
 							vector<pair<float, float>> p;
 							// Test each corner of hit tile, storing the distance from
 							// the player, and the calculated dot product of the two rays
-							for (int tx = 0; tx < 2; tx++)
+							for (int tx = 0; tx < 2; tx++) {
 								for (int ty = 0; ty < 2; ty++) {
 									// Angle of corner to eye
 									float vy = (float)nTestY + ty - fPlayerY;
@@ -832,13 +1006,20 @@ int main() {
 									float dot = (fEyeX * vx / d) + (fEyeY * vy / d);
 									p.push_back(make_pair(d, dot));
 								}
+							}
 							// Sort Pairs from closest to farthest
 							sort(p.begin(), p.end(), [](const pair<float, float> &left, const pair<float, float> &right) {return left.first < right.first; });
 							// First two/three are closest (we will never see all four)
 							float fBound = 0.01;
-							if (acos(p.at(0).second) < fBound) bBoundary = true;
-							if (acos(p.at(1).second) < fBound) bBoundary = true;
-							if (acos(p.at(2).second) < fBound) bBoundary = true;
+							if (acos(p.at(0).second) < fBound) {
+								bBoundary = true; 
+							}
+							if (acos(p.at(1).second) < fBound) {
+								bBoundary = true; 
+							}
+							if (acos(p.at(2).second) < fBound) {
+								bBoundary = true; 
+							}
 						}
 						else if (map.c_str()[nTestX * nMapWidth + nTestY] == 'X') {
 							// Ray has hit wall
@@ -850,7 +1031,7 @@ int main() {
 							vector<pair<float, float>> p;
 							// Test each corner of hit tile, storing the distance from
 							// the player, and the calculated dot product of the two rays
-							for (int tx = 0; tx < 2; tx++)
+							for (int tx = 0; tx < 2; tx++) {
 								for (int ty = 0; ty < 2; ty++) {
 									// Angle of corner to eye
 									float vy = (float)nTestY + ty - fPlayerY;
@@ -859,13 +1040,20 @@ int main() {
 									float dot = (fEyeX * vx / d) + (fEyeY * vy / d);
 									p.push_back(make_pair(d, dot));
 								}
+							}
 							// Sort Pairs from closest to farthest
 							sort(p.begin(), p.end(), [](const pair<float, float> &left, const pair<float, float> &right) {return left.first < right.first; });
 							// First two/three are closest (we will never see all four)
 							float fBound = 0.01;
-							if (acos(p.at(0).second) < fBound) bBoundary = true;
-							if (acos(p.at(1).second) < fBound) bBoundary = true;
-							if (acos(p.at(2).second) < fBound) bBoundary = true;
+							if (acos(p.at(0).second) < fBound) { 
+								bBoundary = true; 
+							}
+							if (acos(p.at(1).second) < fBound) {
+								bBoundary = true; 
+							}
+							if (acos(p.at(2).second) < fBound) {
+								bBoundary = true; 
+							}
 						}
 					}
 				}
@@ -973,6 +1161,7 @@ int main() {
 				wstring maxHealth = mhss.str();
 				engine.conPrintAdd(9, L"   ___________", screen);
 				engine.conPrintAdd(10, L"   HEALTH: " + health + L"/" + maxHealth, screen);
+				engine.conPrint(11, L"Seed: " + engine.StringToWString(seed), screen);
 				showInventory = false;
 			}
 			// Display Map
@@ -988,11 +1177,11 @@ int main() {
 			// Display Frame
 			screen[nScreenWidth * nScreenHeight - 1] = '\0';
 			WriteConsoleOutputCharacter(buffer, screen, nScreenWidth * nScreenHeight, { 0,0 }, &dwBytesWritten);
-			if (fPlayerY <= 31){
-				map = generateLEvel(tree);
+			if (fPlayerX < 2) {
+				map = selectTree(tree);
 				fPlayerX = 30.0;
 				fPlayerY = 2.0;
-				colorMode = rand()%256;
+				colorMode = rand() % 256;
 				HANDLE newColor = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
 				SetConsoleActiveScreenBuffer(newColor);
 				DWORD CdwBytesWritten = 0;
