@@ -34,7 +34,8 @@ bool showInventory = false;
 bool lapsed = false;
 bool inCombat = false;
 bool canCombat = true;
-string seed = "NULL";
+string totalSeed = "NULL";
+string seed = totalSeed;
 class nde {
 public:
 	nde *left;
@@ -128,22 +129,17 @@ void printPreliminary() {
 		fFOV = 3.14159 / fovDivisor;
 		cout << "|\n| >>> Input Color Scheme: \n| <<< ";
 		cin >> colorMode;
-		cout << "Seed:(12 digit alpha numberic, or non zero alpha numeric divisible by 12) \n";
+		cout << "| >>> Seed:(12 digit alpha numberic, or non zero alpha numeric divisible by 12) \n";
 		string seedchoice;
 		cin >> seedchoice;
 		if (seedchoice == "y") {
-			cout << "input seed: \n";
+			cout << "| $input seed: \n| ";
 			while (seed.length() % 12 != 0 || seed.length() == 0) {
-				cin >> seed;
+				cin >> totalSeed;
+				seed = totalSeed;
 			}
 		}
-		else {
-			seed = random_string();
-		}
 		cout << "\n";
-	}
-	else {
-		seed = random_string();
 	}
 	cout << "|___________________________________________________ \n";
 }
@@ -658,6 +654,10 @@ int main() {
 	srand(time(NULL));
 	printReadMe();
 	printPreliminary();
+	if (seed.length() < 12) {
+		totalSeed = random_string();
+		seed = totalSeed;
+	}
 	conEngine engine;
 	general gen;
 	player my = player();
@@ -1161,7 +1161,8 @@ int main() {
 				wstring maxHealth = mhss.str();
 				engine.conPrintAdd(9, L"   ___________", screen);
 				engine.conPrintAdd(10, L"   HEALTH: " + health + L"/" + maxHealth, screen);
-				engine.conPrint(11, L"Seed: " + engine.StringToWString(seed), screen);
+				engine.conPrintAdd(11, L"Seed: " + engine.StringToWString(totalSeed), screen);
+				engine.conPrintAdd(12, L"Next Seed Chunk: " + engine.StringToWString(seed), screen);
 				showInventory = false;
 			}
 			// Display Map
