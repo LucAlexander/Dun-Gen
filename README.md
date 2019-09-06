@@ -1,5 +1,5 @@
 For this to work, all files need to be in the same immediate directory as the .exe
-The file system displayed here is currently only organizational until our programmers stop being lazy as shit.
+The file system displayed here is currently only organizational until our programmers stop being lazy.
 
 Source.cpp/conEngine.h
   *Main Loop
